@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBCare - Cổng Thông Tin & Dịch Vụ Chăm Sóc Sức Khỏe Tại Nhà</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--primary-blue:#0284c7;--primary-dark:#0369a1;--accent-green:#10b981;--danger-red:#ef4444;--warning-orange:#f97316;--bg-top:#f0f7ff;--bg-body:#f8fafc;--navy-dark:#0f172a;--text-dark:#1e293b;--text-muted:#64748b;--font-main:'Plus Jakarta Sans',sans-serif;--shadow-sm:0 2px 8px rgba(0,0,0,.04);--shadow-md:0 10px 30px -5px rgba(2,132,199,.08);--shadow-hover:0 20px 35px -10px rgba(2,132,199,.15)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-main);color:var(--text-dark);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font-family:inherit}
+.container{max-width:1600px;width:94%;margin:0 auto;padding:0 20px}
+
+/* HEADER */
+.top-header{background:var(--bg-top);padding:12px 0;border-bottom:1px solid #e0f2fe}
+.top-header-flex{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo-box{display:flex;align-items:center;text-decoration:none;flex-shrink:0;cursor:pointer}
+.logo-circle{width:64px;height:64px;border-radius:50%;border:3px solid #38bdf8;background:#fff;display:flex;align-items:center;justify-content:center;color:#ef4444;font-size:28px;box-shadow:0 0 15px rgba(56,189,248,.25);transition:transform .3s}
+.logo-box:hover .logo-circle{transform:scale(1.05) rotate(5deg)}
+.header-title-center{text-align:center;flex-grow:1}
+.header-title-center h1{font-size:22px;font-weight:900;color:var(--primary-blue);letter-spacing:-.3px;text-transform:uppercase;line-height:1.2}
+.sub-header-title{font-size:10.5px;font-weight:800;color:var(--accent-green);letter-spacing:1px;display:block;margin-top:2px}
+.right-action-group{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.buttons-row{display:flex;align-items:center;gap:8px}
+.btn-pill{border:none;color:#fff;padding:7px 14px;border-radius:30px;font-size:12px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:var(--shadow-sm);transition:all .2s;white-space:nowrap}
+.btn-consult{background:linear-gradient(135deg,#0284c7,#2563eb)}
+.btn-recruit{background:linear-gradient(135deg,#f97316,#ea580c)}
+.btn-hotline{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.btn-account{background:linear-gradient(135deg,#0284c7,#0369a1)}
+.btn-pill:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.search-pill-box{position:relative;width:100%;max-width:400px}
+.search-pill-box input{width:100%;padding:7px 36px 7px 16px;border-radius:30px;border:1px solid #bae6fd;font-size:12.5px;outline:none;background:#fff}
+.search-pill-box input:focus{border-color:var(--primary-blue);box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+.search-pill-box i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#0284c7;font-size:13px}
+
+/* NAVBAR */
+.main-navbar{background:#0284c7;position:sticky;top:0;z-index:1000;box-shadow:0 4px 15px rgba(2,132,199,.2)}
+.nav-list{list-style:none;display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav-item{position:relative;text-align:center;flex-grow:1}
+.nav-item-icon{flex-grow:0}
+.nav-link{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 10px;color:#fff;font-weight:800;font-size:13px;text-decoration:none;text-transform:uppercase;white-space:nowrap;transition:background-color .2s;width:100%;cursor:pointer}
+.nav-link:hover{background:rgba(255,255,255,.18)}
+.nav-right-actions{display:flex;align-items:center;gap:10px;margin-left:auto;padding-left:10px}
+.nav-cart-btn{display:flex;align-items:center;gap:8px;color:#fff;font-size:14px;font-weight:800;text-decoration:none;cursor:pointer;padding:8px 16px;background:rgba(255,255,255,.2);border-radius:30px;transition:all .2s}
+.nav-cart-btn:hover{background:rgba(255,255,255,.32)}
+.nav-cart-count{background:#ef4444;color:#fff;font-size:12px;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.dropdown-menu{position:absolute;top:100%;left:0;width:280px;background:#fff;list-style:none;box-shadow:0 15px 35px rgba(0,0,0,.15);display:none;border-top:3px solid var(--primary-blue);text-align:left}
+.nav-item:hover>.dropdown-menu{display:block}
+.dropdown-menu li a{display:block;padding:12px 20px;color:var(--text-dark);font-size:13px;font-weight:600;text-decoration:none;border-bottom:1px solid #f1f5f9;cursor:pointer}
+.dropdown-menu li a:hover{background:#f0f9ff;color:var(--primary-blue)}
+
+/* PAGES */
+.page-section{display:none}
+.page-section.page-active{display:block}
+
+/* HERO */
+.hero-banner{background:linear-gradient(90deg,rgba(15,23,42,.88) 0%,rgba(15,23,42,.72) 48%,rgba(15,23,42,.15) 100%),url('https://homecaretuanhoang.com/thumb/1920x750x1x90/upload/hinhanh/banner-danhmuc-9668.jpg') no-repeat center right/cover,#0f172a;color:#fff;padding:100px 0}
+.hero-content{max-width:750px}
+.hero-tag{background:#10b981;color:#fff;padding:7px 18px;border-radius:30px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;box-shadow:0 4px 15px rgba(16,185,129,.4)}
+.hero-title{font-size:44px;font-weight:900;line-height:1.2;margin-bottom:22px;text-shadow:0 3px 12px rgba(0,0,0,.8)}
+.hero-title span{color:#38bdf8}
+.hero-desc{color:#f8fafc;margin-bottom:36px;font-size:16px;font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.hero-btn-group{display:flex;gap:16px;flex-wrap:wrap}
+.btn-action-main{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:15px 32px;border-radius:12px;font-weight:800;border:none;cursor:pointer;font-size:15px;box-shadow:0 10px 25px -5px rgba(16,185,129,.5);transition:all .3s}
+.btn-action-main:hover{transform:translateY(-2px)}
+.btn-action-outline{background:rgba(15,23,42,.75);color:#fff;padding:15px 32px;border-radius:12px;font-weight:800;border:1.5px solid rgba(255,255,255,.5);font-size:15px;cursor:pointer}
+
+/* ABOUT */
+.about-page-section{padding:80px 0;background:#fff}
+.about-block{margin-bottom:48px}
+.about-block-title{font-size:28px;font-weight:900;color:#0284c7;text-transform:uppercase;margin-bottom:20px}
+.about-paragraph{font-size:15.5px;color:#334155;line-height:1.8;margin-bottom:16px;text-align:justify}
+.about-row{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:40px}
+.bullet-list{list-style:none;margin-top:16px}
+.bullet-list li{position:relative;padding-left:20px;margin-bottom:10px;font-weight:600;color:#1e293b;font-size:14.5px}
+.bullet-list li::before{content:'•';position:absolute;left:0;color:#0284c7;font-size:18px}
+.about-image-box img{width:100%;height:360px;object-fit:cover;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.core-values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:24px}
+.value-card{background:#f8fafc;border-radius:16px;padding:30px;border:1px solid #e2e8f0}
+.value-card h4{font-size:18px;font-weight:800;color:#0284c7;margin-bottom:12px}
+.value-card p{font-size:14.5px;color:#475569}
+
+/* SERVICES */
+.service-detail-section{padding:80px 0;background:#f8fafc;border-top:1px solid #e2e8f0}
+.service-detail-layout{display:grid;grid-template-columns:1fr 360px;gap:40px}
+.service-main-text h2{font-size:28px;font-weight:900;margin-bottom:24px}
+.service-main-text p{font-size:15px;color:#334155;margin-bottom:18px;line-height:1.7}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:50px}
+.service-card{background:#fff;padding:36px;border-radius:24px;border:1px solid #e2e8f0;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;justify-content:space-between;transition:all .3s}
+.service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover);border-color:#bae6fd}
+.highlight-card{border:2px solid var(--primary-blue)}
+.card-badge{background:#e0f2fe;color:var(--primary-blue);font-size:11.5px;font-weight:800;padding:5px 14px;border-radius:20px;display:inline-block;margin-bottom:16px}
+.badge-cyan{background:#dcfce7;color:#15803d}
+.badge-red{background:#fef2f2;color:#dc2626}
+.card-sub-text{font-size:14.5px;color:var(--text-muted);margin-bottom:20px}
+.task-box-title{font-size:13px;font-weight:800;color:var(--primary-blue);margin-bottom:12px;text-transform:uppercase}
+.task-list{list-style:none;margin-bottom:28px}
+.task-list li{margin-bottom:12px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px}
+.task-list i{color:var(--accent-green)}
+.btn-card{background:var(--primary-blue);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;cursor:pointer;width:100%;font-size:14px;transition:background .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-card:hover{background:var(--primary-dark)}
+.btn-secondary{background:#475569}
+.btn-secondary:hover{background:#334155}
+.sos-card{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.sos-card .card-sub-text,.sos-card .task-list li{color:rgba(255,255,255,.95)}
+.sos-card .task-list i{color:#fff}
+.btn-sos{background:#fff;color:#dc2626;border:none;padding:14px;border-radius:12px;font-weight:900;cursor:pointer;width:100%;font-size:14px}
+
+/* PRODUCTS */
+.products-section{padding:80px 0;background:#fff}
+.section-title-box{text-align:center;margin-bottom:50px}
+.sub-title{color:var(--primary-blue);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:8px}
+.main-sec-title{font-size:34px;font-weight:900}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.product-card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:20px;text-align:center;transition:all .3s;box-shadow:var(--shadow-sm)}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.product-img{width:100%;height:190px;object-fit:cover;border-radius:14px;margin-bottom:16px;background:#e2e8f0}
+.product-tag{font-size:11px;font-weight:800;color:var(--primary-blue);text-transform:uppercase}
+.tag-rent{color:var(--accent-green)}
+.product-title{font-size:15.5px;font-weight:800;margin:8px 0;line-height:1.35;height:42px;overflow:hidden}
+.product-price{color:var(--primary-blue);font-weight:900;font-size:17px;margin-bottom:16px}
+.btn-buy,.btn-rent{color:#fff;border:none;padding:11px;border-radius:10px;font-weight:800;width:100%;cursor:pointer;font-size:13.5px}
+.btn-buy{background:var(--primary-blue)}.btn-buy:hover{background:var(--primary-dark)}
+.btn-rent{background:var(--accent-green)}
+
+/* BLOG & STAFF */
+.blog-section,.staff-section{padding:80px 0;background:#f8fafc}
+.blog-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px}
+.blog-featured{background:#fff;border-radius:20px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:var(--shadow-sm)}
+.blog-featured img{width:100%;height:260px;object-fit:cover}
+.blog-content{padding:24px}
+.blog-sidebar{display:flex;flex-direction:column;gap:16px}
+.blog-mini-card{display:flex;gap:16px;background:#fff;padding:12px;border-radius:16px;border:1px solid #e2e8f0}
+.blog-mini-card img{width:80px;height:80px;border-radius:12px;object-fit:cover}
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.staff-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:var(--shadow-sm);text-align:center}
+.staff-header{height:100px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:900}
+.staff-body{padding:20px}
+
+/* CART */
+.cart-page-section{padding:60px 0 90px;background:#f8fafc;min-height:85vh}
+.cart-page-grid{display:grid;grid-template-columns:1fr 420px;gap:36px;margin-top:28px}
+.cart-card{background:#fff;border-radius:24px;border:1px solid #e2e8f0;padding:32px;box-shadow:var(--shadow-sm)}
+.cart-header-title{font-size:26px;font-weight:900;display:flex;align-items:center;gap:12px}
+.cart-table{width:100%;border-collapse:collapse;text-align:left}
+.cart-table th{padding:16px;background:#f1f5f9;font-size:13px;font-weight:800;color:var(--text-muted);text-transform:uppercase;border-bottom:2px solid #e2e8f0}
+.cart-table td{padding:20px 16px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.cart-item-flex{display:flex;align-items:center;gap:16px}
+.cart-item-img{width:70px;height:70px;border-radius:12px;object-fit:cover;border:1px solid #e2e8f0}
+.cart-item-name{font-size:15.5px;font-weight:800}
+.qty-controls{display:inline-flex;align-items:center;border:1.5px solid #cbd5e1;border-radius:10px;overflow:hidden;background:#fff}
+.qty-btn{width:32px;height:32px;border:none;background:#f1f5f9;font-weight:800;cursor:pointer}
+.qty-btn:hover{background:#e2e8f0;color:var(--primary-blue)}
+.qty-val{width:38px;text-align:center;font-weight:800}
+.btn-del{background:#fef2f2;color:#ef4444;border:1px solid #fecaca;width:36px;height:36px;border-radius:10px;cursor:pointer}
+.btn-del:hover{background:#ef4444;color:#fff}
+.summary-box{background:#f0f9ff;border:1.5px dashed #7dd3fc;border-radius:18px;padding:24px;margin-bottom:24px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:15px;color:var(--text-muted)}
+.summary-total{border-top:1px solid #bae6fd;padding-top:14px;margin-top:14px;font-size:18px;font-weight:900;color:var(--navy-dark)}
+.total-price{color:#ef4444;font-size:24px;font-weight:900}
+.btn-checkout-page{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;padding:16px;border-radius:14px;font-weight:900;font-size:16.5px;width:100%;cursor:pointer;box-shadow:0 8px 20px rgba(16,185,129,.35);display:flex;align-items:center;justify-content:center;gap:10px}
+
+/* BOOKING PAGE */
+.service-banner-section{background:linear-gradient(135deg,rgba(15,23,42,.94),rgba(3,105,161,.9)),url('https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&q=80&w=1600') no-repeat center/cover,#0f172a;padding:40px 0 60px;color:#fff}
+.booking-hero-card{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.22);border-radius:24px;padding:28px 32px;box-shadow:0 25px 50px -12px rgba(0,0,0,.45)}
+.booking-header-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px;border-bottom:1px solid rgba(255,255,255,.16);padding-bottom:18px}
+.booking-hero-title{font-size:23px;font-weight:900;color:#38bdf8;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.booking-hero-sub{font-size:13.5px;color:#cbd5e1;margin-top:4px}
+.booking-badge-group{display:flex;gap:10px;flex-wrap:wrap}
+.booking-hero-badge{background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.5);color:#6ee7b7;padding:6px 14px;border-radius:30px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:6px}
+
+/* DETAIL ARTICLE */
+.service-layout-grid{display:grid;grid-template-columns:1fr 380px;gap:40px;padding:60px 0}
+.detail-article-card{background:#fff;border-radius:20px;padding:40px;border:1px solid #e2e8f0;box-shadow:var(--shadow-sm)}
+.detail-header-title{font-size:28px;font-weight:900;color:var(--primary-blue);line-height:1.3;margin-bottom:20px}
+.divider-line{height:4px;width:60px;background:var(--primary-blue);border-radius:2px;margin-bottom:25px}
+.article-body-content p{font-size:15.5px;color:#334155;line-height:1.8;margin-bottom:20px}
+.article-body-content h3{font-size:20px;font-weight:800;margin:30px 0 15px}
+.article-body-content ul{list-style:none;margin-bottom:25px}
+.article-body-content ul li{position:relative;padding-left:26px;margin-bottom:12px;font-size:15px;font-weight:600}
+.article-body-content ul li::before{content:"\f058";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;left:0;color:var(--accent-green)}
+.why-choose-sidebar{background:#0284c7;color:#fff;border-radius:16px;padding:32px 24px}
+.why-choose-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:20px}
+.why-choose-icon{width:50px;height:50px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.why-choose-title{font-size:15px;font-weight:900;text-transform:uppercase;line-height:1.3}
+.why-choose-list{list-style:none}
+.why-choose-list li{position:relative;padding-left:24px;margin-bottom:16px;font-size:14px;font-weight:600}
+.why-choose-list li::before{content:'•';position:absolute;left:0;top:-2px;font-size:20px}
+.sidebar-widget{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.sidebar-widget-title{font-size:16px;font-weight:900;color:var(--primary-blue);text-transform:uppercase;padding-bottom:12px;border-bottom:2px solid #e0f2fe;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sidebar-links-list{list-style:none}
+.sidebar-links-list li{padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;font-weight:600}
+.sidebar-links-list a{color:var(--text-dark);display:flex;align-items:center;gap:10px;cursor:pointer}
+.sidebar-links-list a:hover{color:var(--primary-blue)}
+
+/* PROFILE */
+.profile-page-section{padding:50px 0 80px;background:#f1f5f9}
+.page-container{max-width:1500px;width:95%;margin:0 auto;background:#fff;border-radius:24px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid #e2e8f0}
+.page-header{margin-bottom:35px;border-bottom:2px solid #e2e8f0;padding-bottom:20px}
+.page-header h1{color:#0284c7;font-size:28px;font-weight:900;display:flex;align-items:center;gap:12px;text-transform:uppercase}
+.page-header h1 i{color:#ef4444;font-size:32px}
+.content-grid{display:grid;grid-template-columns:400px 1fr;gap:35px}
+.card{border:1px solid #cbd5e1;border-radius:20px;padding:30px;background:#fff}
+.card-title{font-size:20px;font-weight:800;color:#0284c7;margin-bottom:24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #f1f5f9;padding-bottom:12px}
+.vitals-box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:16px;padding:24px;margin-bottom:25px}
+.vital-item{margin-bottom:20px;font-size:15.5px}
+.vital-item:last-child{margin-bottom:0}
+.vital-item span{display:block;font-weight:600;font-size:14px;color:var(--text-muted);margin-bottom:4px}
+.vital-item strong{color:#0284c7;font-size:22px;font-weight:900}
+.vital-item .status-ok{color:#16a34a;margin-top:4px;font-size:13.5px;font-weight:700}
+.vital-item .spo2-text{color:#16a34a}
+.table-responsive{overflow-x:auto}
+.appointment-table{width:100%;border-collapse:collapse;text-align:left}
+.appointment-table th{background:#f8fafc;padding:16px 18px;font-size:15px;font-weight:800;border-bottom:2px solid #cbd5e1;text-transform:uppercase}
+.appointment-table td{padding:20px 18px;border-bottom:1px solid #e2e8f0;font-size:15px;vertical-align:middle}
+.service-name{font-weight:800;font-size:16px}
+.nurse-name{font-size:14px;font-weight:700;color:#0284c7;margin-top:6px;display:flex;align-items:center;gap:6px}
+.badge-success{background:#dcfce7;color:#15803d;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:800;display:inline-block}
+.btn{border:none;padding:10px 20px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;color:#fff}
+.btn:hover{opacity:.9}
+.btn-primary{background:#0284c7}
+.btn-full{width:100%;padding:14px;font-size:15px}
+.btn-warning{background:linear-gradient(135deg,#eab308,#ca8a04)}
+
+/* RECRUIT */
+.recruitment-hero{background:linear-gradient(135deg,rgba(15,23,42,.9),rgba(3,105,161,.85)),url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200') center/cover,#0f172a;padding:70px 0;color:#fff;text-align:center}
+.recruitment-grid{display:grid;grid-template-columns:2fr 1fr;gap:35px;padding:60px 0}
+.job-card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:28px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.job-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:12px}
+.job-title{font-size:20px;font-weight:800}
+.job-salary{background:#dcfce7;color:#15803d;font-size:13.5px;font-weight:800;padding:6px 16px;border-radius:20px;white-space:nowrap}
+.job-meta{display:flex;gap:16px;font-size:13.5px;color:var(--text-muted);margin-bottom:16px;font-weight:600;flex-wrap:wrap}
+.perks-box{background:#f0f9ff;border-radius:16px;padding:24px;border:1px solid #bae6fd;margin-bottom:28px}
+
+/* ACCOUNT */
+.account-page-section{padding:50px 0 80px;background:#f8fafc;min-height:85vh}
+.account-grid{display:grid;grid-template-columns:320px 1fr;gap:32px;margin-top:25px}
+.account-sidebar{background:#fff;border-radius:20px;padding:28px;border:1px solid #e2e8f0;height:fit-content}
+.user-profile-header{text-align:center;padding-bottom:20px;border-bottom:1px solid #f1f5f9;margin-bottom:20px}
+.user-avatar-large{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-size:36px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.account-menu-list{list-style:none}
+.account-menu-item{padding:12px 16px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.account-menu-item:hover,.account-menu-item.active{background:#e0f2fe;color:var(--primary-blue)}
+.account-content-card{background:#fff;border-radius:20px;padding:36px;border:1px solid #e2e8f0}
+.acc-h2{font-size:22px;font-weight:900;margin-bottom:20px;border-bottom:2px solid #f1f5f9;padding-bottom:12px}
+
+/* FLOAT + FOOTER */
+.floating-contact-widget{position:fixed;right:20px;bottom:30px;z-index:999;display:flex;flex-direction:column;gap:12px}
+.float-btn{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;text-decoration:none;box-shadow:0 4px 15px rgba(0,0,0,.2);background:#0284c7}
+.btn-zalo{background:#2563eb;font-weight:900;font-size:13px}
+.footer{background:var(--navy-dark);color:#94a3b8;padding:70px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;margin-bottom:40px}
+.footer h3,.footer h4{color:#fff;margin-bottom:20px;font-weight:800}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:12px}
+.footer a{color:#94a3b8;text-decoration:none;font-size:14.5px;cursor:pointer}
+.footer a:hover{color:#fff}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.75);backdrop-filter:blur(5px);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-card{background:#fff;border-radius:24px;width:100%;max-width:580px;padding:32px;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.close-btn{border:none;background:#f1f5f9;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;color:var(--text-muted)}
+.close-btn:hover{background:#e2e8f0;color:var(--danger-red)}
+.auth-tab-box{display:flex;border-bottom:2px solid #e2e8f0;margin-bottom:24px}
+.auth-tab{flex:1;padding:12px;text-align:center;font-weight:800;color:var(--text-muted);cursor:pointer}
+.auth-tab.active{color:var(--primary-blue);border-bottom:3px solid var(--primary-blue)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-weight:700;font-size:13.5px;margin-bottom:6px}
+.form-control{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #cbd5e1;font-size:14px;outline:none;font-family:inherit}
+.form-control:focus{border-color:var(--primary-blue);box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+
+/* WIZARD ĐẶT CA (ĐÃ ẨN SIDEBAR TÓM TẮT Ở CÁC BƯỚC ĐẦU, CHỈ HIỆN KHI BƯỚC 4 VÀ HOÀN TẤT) */
+.wz-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;transition:grid-template-columns .3s}
+.wz-layout.has-summary{grid-template-columns:1fr 380px}
+.wz-main{background:#fff;color:var(--text-dark);border-radius:20px;padding:26px;box-shadow:0 16px 36px rgba(0,0,0,.25)}
+.wz-steps{list-style:none;display:flex;gap:6px;margin-bottom:24px}
+.wz-steps li{flex:1;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:#f1f5f9;color:#94a3b8;font-size:12.5px;font-weight:800}
+.wz-steps li b{width:24px;height:24px;border-radius:50%;background:#cbd5e1;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.wz-steps li.active{background:#e0f2fe;color:var(--primary-dark)}
+.wz-steps li.active b{background:var(--primary-blue)}
+.wz-steps li.done{background:#dcfce7;color:#15803d;cursor:pointer}
+.wz-steps li.done b{background:var(--accent-green)}
+
+/* THANH GHI CHÚ LỰA CHỌN BƯỚC 1 KHI SANG BƯỚC 2+ */
+.step1-selected-badge{background:#e0f2fe;border:1px solid #bae6fd;border-radius:12px;padding:10px 14px;margin-bottom:18px;font-size:13px;color:#0369a1;display:flex;align-items:center;gap:10px;font-weight:700}
+.step1-selected-badge i{color:var(--primary-blue);font-size:16px}
+
+.wz-h{font-size:21px;font-weight:900;color:var(--navy-dark);margin-bottom:4px}
+.wz-sub{font-size:13.5px;color:var(--text-muted);margin-bottom:18px}
+.wz-label{font-size:13px;font-weight:800;color:var(--navy-dark);margin:20px 0 8px}
+.wz-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wz-card{border:2px solid #e2e8f0;border-radius:14px;padding:14px;cursor:pointer;display:flex;gap:12px;align-items:center;background:#fff;transition:all .15s;position:relative}
+.wz-card:hover{border-color:#38bdf8;background:#f8fafc}
+.wz-card.sel{border-color:var(--primary-blue);background:#f0f9ff;box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+.wz-card.sel::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;top:10px;right:12px;color:var(--primary-blue);font-size:14px}
+.wz-card>i{font-size:22px;color:var(--primary-blue);width:30px;text-align:center}
+.wz-card h5{font-size:14px;font-weight:800}
+.wz-card span.d{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+.wz-card span.price-tag{font-size:12px;font-weight:800;color:var(--accent-green);display:block;margin-top:4px}
+.wz-pills,.wz-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.wz-chip{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:20px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer}
+.wz-chip:hover{border-color:#38bdf8}
+.wz-chip.sel{background:var(--primary-blue);border-color:var(--primary-blue);color:#fff}
+
+/* THỜI GIAN GRID VỚI GIÁ TIỀN TRỰC QUAN */
+.time-options-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.time-opt-card{border:2px solid #e2e8f0;border-radius:14px;padding:14px;text-align:center;cursor:pointer;background:#fff;transition:all .2s;position:relative}
+.time-opt-card:hover{border-color:#38bdf8;background:#f8fafc}
+.time-opt-card.sel{border-color:var(--primary-blue);background:#f0f9ff;box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+.time-opt-card h5{font-size:14px;font-weight:800;color:var(--navy-dark)}
+.time-opt-card .sub-tag{font-size:11px;font-weight:800;color:var(--accent-green);margin-top:3px;display:block}
+.time-opt-card .price-val{font-size:15px;font-weight:900;color:var(--danger-red);margin-top:8px;display:block}
+
+.custom-days-box{background:#f0f9ff;border:1.5px dashed #7dd3fc;border-radius:14px;padding:16px;margin-top:12px;display:flex;align-items:center;gap:14px}
+.custom-days-input{width:90px;padding:8px 12px;border-radius:10px;border:2px solid #0284c7;font-weight:900;font-size:16px;text-align:center;color:var(--primary-dark);outline:none}
+
+.wz-input{padding:11px 14px;border-radius:12px;border:2px solid #cbd5e1;font-family:inherit;font-size:14px;font-weight:600;outline:none;width:100%}
+.wz-input:focus{border-color:var(--primary-blue)}
+.wz-row .wz-input{width:auto;flex:0 0 170px}
+.wz-shift{border:2px solid #e2e8f0;border-radius:14px;padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}
+.wz-shift:hover{border-color:#38bdf8}
+.wz-shift.sel{border-color:var(--primary-blue);background:#f0f9ff;box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+.wz-shift h5{font-size:14px;font-weight:800}
+.wz-shift span.d{font-size:12px;color:var(--text-muted);display:block}
+.wz-shift .p{font-size:15px;font-weight:900;color:var(--danger-red);white-space:nowrap;text-align:right}
+.wz-shift .p small{display:block;font-size:11px;color:var(--text-muted);font-weight:600}
+.wz-hours{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.wz-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wz-form .full{grid-column:1/-1}
+.wz-error{display:none;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:12px 16px;font-size:13.5px;font-weight:700;margin-top:16px}
+.wz-error.show{display:block}
+.wz-nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;padding-top:18px;border-top:1.5px solid #f1f5f9}
+.wz-btn-back{background:#f1f5f9;border:none;border-radius:12px;padding:13px 20px;font-weight:800;cursor:pointer;color:var(--navy-dark)}
+.wz-btn-next{flex:1;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;border:none;border-radius:12px;padding:14px 20px;font-size:15px;font-weight:900;cursor:pointer}
+.wz-btn-next.final{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.wz-btn-next:hover{filter:brightness(1.08)}
+
+.wz-summary{background:#fff;color:var(--text-dark);border-radius:20px;padding:22px;box-shadow:0 16px 36px rgba(0,0,0,.25);position:sticky;top:70px;display:none}
+.wz-summary.show{display:block}
+.wz-summary h4{font-size:16px;font-weight:900;color:var(--primary-blue);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #e0f2fe}
+.wz-sr{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0;border-bottom:1px dashed #e2e8f0;color:var(--text-muted)}
+.wz-sr strong{color:var(--navy-dark);text-align:right;max-width:62%}
+.wz-sr strong.empty{color:#94a3b8;font-weight:600;font-style:italic}
+.wz-price-breakdown{margin-top:10px;background:#f8fafc;padding:12px;border-radius:12px;border:1px solid #e2e8f0}
+.wz-price-item{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;color:#475569}
+.wz-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-weight:800}
+.wz-total strong{font-size:22px;font-weight:900;color:var(--danger-red)}
+.wz-disc{font-size:12px;font-weight:800;color:var(--accent-green);text-align:right;margin-top:2px}
+.wz-note{font-size:11.5px;color:var(--text-muted);margin-top:14px;line-height:1.5}
+.wz-done{text-align:center;padding:20px 10px}
+.wz-done .ok{width:72px;height:72px;border-radius:50%;background:#dcfce7;color:#16a34a;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.wz-done .code{display:inline-block;background:#f0f9ff;border:1.5px dashed #7dd3fc;border-radius:12px;padding:8px 18px;font-weight:900;color:var(--primary-dark);margin:10px 0 18px}
+.nurse-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--primary-blue);flex-shrink:0;background:#e2e8f0}
+@media(max-width:1000px){.wz-layout{grid-template-columns:1fr}.wz-summary{position:static}.wz-steps li span{display:none}.wz-grid2,.wz-form,.time-options-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header class="top-header">
+  <div class="container top-header-flex">
+    <div onclick="navigateTo('homePage')" class="logo-box"><div class="logo-circle"><i class="fa-solid fa-heart-pulse"></i></div></div>
+    <div class="header-title-center">
+      <h1>CÔNG TY TNHH HOMECARE BBCare</h1>
+      <span class="sub-header-title">HEALTHCARE AT HOME - CHĂM SÓC SỨC KHỎE TOÀN DIỆN</span>
+    </div>
+    <div class="right-action-group">
+      <div class="buttons-row">
+        <button type="button" onclick="navigateTo('recruitmentPage')" class="btn-pill btn-recruit"><i class="fa-solid fa-user-plus"></i> Tuyển dụng Y/Bác sĩ</button>
+        <button type="button" onclick="openModal('bookingModal')" class="btn-pill btn-consult"><i class="fa-solid fa-comments"></i> Tư vấn miễn phí</button>
+        <a href="tel:0908786168" class="btn-pill btn-hotline"><i class="fa-solid fa-phone"></i> 0908786168</a>
+        <a href="javascript:void(0)" onclick="handleAccountClick()" class="btn-pill btn-account"><i class="fa-solid fa-circle-user"></i> <span id="accountLabel">TÀI KHOẢN</span></a>
+      </div>
+      <div class="search-pill-box">
+        <input type="text" placeholder="Tìm kiếm thực phẩm chức năng, bình Oxy, máy y tế...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAVBAR -->
+<nav class="main-navbar">
+  <div class="container">
+    <ul class="nav-list">
+      <li class="nav-item nav-item-icon"><a href="javascript:void(0)" onclick="navigateTo('homePage')" class="nav-link" title="Trang chủ"><i class="fa-solid fa-house"></i></a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="goHomeAnchor('about-story')" class="nav-link">GIỚI THIỆU</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="openBooking()" class="nav-link"><i class="fa-solid fa-user-nurse"></i> ĐẶT CA ĐIỀU DƯỠNG & HỘ LÝ</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="navigateTo('profilePage')" class="nav-link"><i class="fa-solid fa-id-card-clip"></i> HỒ SƠ SỨC KHỎE</a></li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">DỊCH VỤ KHÁC <i class="fa-solid fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a onclick="loadServiceDetail('binhoxy')">Cho thuê Bình Oxy Tận Nhà</a></li>
+          <li><a onclick="loadServiceDetail('xecuuThuong')">Xe Cấp Cứu Khẩn Cấp 24/7</a></li>
+          <li><a onclick="loadServiceDetail('tuVanSucKhoe')">Tư Vấn Sức Khỏe Bệnh Nhân</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="goHomeAnchor('products')" class="nav-link">SẢN PHẨM & THIẾT BỊ</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="navigateTo('recruitmentPage')" class="nav-link">TUYỂN DỤNG</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="goHomeAnchor('staff')" class="nav-link">ĐỘI NGŨ ĐIỀU DƯỠNG</a></li>
+      <li class="nav-item"><a href="javascript:void(0)" onclick="goHomeAnchor('contact')" class="nav-link">LIÊN HỆ</a></li>
+      <li class="nav-right-actions">
+        <a href="javascript:void(0)" onclick="navigateTo('cartPage')" class="nav-cart-btn"><i class="fa-solid fa-cart-shopping"></i> GIỎ HÀNG <span class="nav-cart-count" id="cartCount">0</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ 1. HOME ============ -->
+<div id="homePage" class="page-section page-active">
+  <section class="hero-banner">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-tag"><i class="fa-solid fa-shield-halved"></i> CHUẨN Y KHOA TẠI NHÀ</span>
+        <h1 class="hero-title">Chăm Sóc Bệnh Nhân <span>Chuẩn Y Tế</span> Ngay Tại Gia Đình</h1>
+        <p class="hero-desc">Đặt ca Điều dưỡng & Hộ lý tận tâm – Tích hợp trọn gói các công việc y tế chuyên sâu, cung cấp & cho thuê thiết bị y khoa cao cấp 24/7.</p>
+        <div class="hero-btn-group">
+          <button type="button" onclick="openBooking()" class="btn-action-main"><i class="regular fa-calendar-check"></i> ĐẶT CA Y TÁ NGAY</button>
+          <button type="button" onclick="navigateTo('cartPage')" class="btn-action-outline"><i class="fa-solid fa-cart-shopping"></i> XEM GIỎ HÀNG SẢN PHẨM</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-story" class="about-page-section">
+    <div class="container">
+      <div class="about-block">
+        <h2 class="about-block-title">CÂU CHUYỆN HOMECARE BBCare</h2>
+        <p class="about-paragraph"><strong>Homecare BBCare</strong> ra đời với sứ mệnh xây dựng nền tảng kết nối y tế thông minh, giúp người bệnh và gia đình dễ dàng <strong>đặt ca Y tá & Điều dưỡng chăm sóc tại nhà</strong> chuẩn y khoa 24/7. Chúng tôi giúp vơi bớt gánh nặng chăm sóc, đồng hành cùng bệnh nhân vượt qua giai đoạn khó khăn để phục hồi sức khỏe an toàn, an tâm ngay tại nhà.</p>
+        <p class="about-paragraph">Với phương châm <em>"Nhận trách nhiệm – Trao yêu thương"</em>, BBCare đảm bảo mọi ca trực điều dưỡng đều đáp ứng quy trình kỹ thuật y tế nghiêm ngặt, tận tâm và đầy lòng trắc ẩn vì một cuộc sống khỏe mạnh, hạnh phúc hơn.</p>
+      </div>
+      <div class="about-block">
+        <h2 class="about-block-title">TẦM NHÌN</h2>
+        <p class="about-paragraph" style="font-weight:700;font-size:16.5px;color:#1e293b">Trở thành nền tảng đặt ca điều dưỡng và dịch vụ chăm sóc y tế tại nhà tin cậy hàng đầu Việt Nam.</p>
+      </div>
+      <div class="about-row">
+        <div>
+          <h2 class="about-block-title">SỨ MỆNH</h2>
+          <p class="about-paragraph">Cung cấp giải pháp chăm sóc y tế gia đình chuyên nghiệp, nhanh chóng và đạt chuẩn y tế chất lượng cao:</p>
+          <ul class="bullet-list">
+            <li>Đặt ca Y tá / Điều dưỡng theo giờ, theo ca hoặc 24/7 tận nhà.</li>
+            <li>Theo dõi chỉ số sinh hiệu, thay băng, rửa vết thương, truyền dịch an toàn.</li>
+            <li>Tối ưu chi phí và thời gian đi lại cho gia đình bệnh nhân.</li>
+            <li>Mang lại sự an tâm, chu đáo và dịch vụ tận tâm cho người bệnh.</li>
+          </ul>
+        </div>
+        <div class="about-image-box"><img src="https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-medical-security-technology-sense-blue-banner-image_261139.jpg" alt="Sứ mệnh BBCare"></div>
+      </div>
+      <div class="about-block" style="margin-top:50px">
+        <h2 class="about-block-title">GIÁ TRỊ CỐT LÕI</h2>
+        <div class="core-values-grid">
+          <div class="value-card"><h4>1. NHÂN VĂN</h4><p>Đặt sự an toàn và sức khỏe người bệnh làm trung tâm cho mọi ca chăm sóc và dịch vụ điều dưỡng.</p></div>
+          <div class="value-card"><h4>2. CHUYÊN MÔN</h4><p>Đội ngũ Y tá/Điều dưỡng được đào tạo bài bản, có chứng chỉ hành nghề và giàu kinh nghiệm.</p></div>
+          <div class="value-card"><h4>3. TIỆN LỢI</h4><p>Ứng dụng công nghệ giúp việc tìm kiếm, kết nối và đặt ca trực y tế diễn ra nhanh chóng, minh bạch.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="service-detail-section">
+    <div class="container">
+      <div class="service-detail-layout">
+        <div class="service-main-text">
+          <h2>Dịch vụ cho thuê bình oxy giá rẻ uy tín tại Đà Nẵng</h2>
+          <p>Bạn đang cần dịch vụ cho thuê bình oxy tại Đà Nẵng? Chúng tôi, công ty Homecare BBCare, sẵn lòng giới thiệu dịch vụ chất lượng cao của chúng tôi.</p>
+          <p>Homecare BBCare là một công ty hàng đầu trong lĩnh vực cung cấp các giải pháp chăm sóc sức khỏe tại Đà Nẵng. Với niềm đam mê nâng cao chất lượng cuộc sống và sự phục vụ tận tâm, chúng tôi cung cấp dịch vụ cho thuê bình oxy uy tín, đảm bảo sự hài lòng và an toàn cho khách hàng của mình.</p>
+        </div>
+        <div class="why-choose-sidebar">
+          <div class="why-choose-header"><div class="why-choose-icon"><i class="fa-solid fa-cross"></i></div><div class="why-choose-title">TẠI SAO NÊN CHỌN DỊCH VỤ CSKH CỦA HOMECARE BBCARE</div></div>
+          <ul class="why-choose-list">
+            <li>Nhân viên giàu y đức và kinh nghiệm</li><li>Chăm sóc chu đáo, tận tình</li><li>Trang thiết bị hiện đại, an toàn và chính xác</li><li>Dịch vụ luôn sẵn sàng, thuận tiện, nhanh chóng và chủ động</li><li>Bảo hiểm tài sản cho gia đình bạn</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card highlight-card">
+          <div>
+            <div class="card-badge">Được chọn nhiều nhất</div>
+            <h3 style="font-size:22px;font-weight:900;margin-bottom:12px">Gói Ca Điều Dưỡng Tận Nhà</h3>
+            <p class="card-sub-text">Trong mỗi ca trực, Y tá/Điều dưỡng viên sẽ thực hiện đầy đủ các nhiệm vụ y tế theo chỉ định của gia đình:</p>
+            <div class="task-box-title"><i class="fa-solid fa-user-nurse"></i> Công việc Y tá thực hiện trong ca:</div>
+            <ul class="task-list">
+              <li><i class="fa-solid fa-circle-check"></i> Thay băng y tế, rửa vết thương, cắt chỉ vết mổ</li>
+              <li><i class="fa-solid fa-circle-check"></i> Truyền nước biển, truyền dịch chuẩn y khoa</li>
+              <li><i class="fa-solid fa-circle-check"></i> Cho người bệnh ăn uống qua ống Sonde</li>
+              <li><i class="fa-solid fa-circle-check"></i> Theo dõi nhịp tim, huyết áp & sinh hiệu</li>
+            </ul>
+          </div>
+          <button type="button" onclick="openBooking()" class="btn-card">ĐẶT CA Y TÁ NGAY</button>
+        </div>
+        <div class="service-card">
+          <div>
+            <div class="card-badge badge-cyan">Cho thuê thiết bị</div>
+            <h3 style="font-size:22px;font-weight:900;margin-bottom:12px">Thuê Bình Oxy Tận Nhà</h3>
+            <p class="card-sub-text">Cung cấp giải pháp cho thuê bình oxy, máy tạo oxy khẩn cấp tận nhà 24/7:</p>
+            <div class="task-box-title"><i class="fa-solid fa-truck-medical"></i> Ưu điểm dịch vụ:</div>
+            <ul class="task-list">
+              <li><i class="fa-solid fa-circle-check"></i> Oxy tinh khiết 99.5% chuẩn y tế</li>
+              <li><i class="fa-solid fa-circle-check"></i> Giao hàng tận nhà 15-30 phút</li>
+              <li><i class="fa-solid fa-circle-check"></i> Hỗ trợ đổi bình khẩn cấp 24/7</li>
+            </ul>
+          </div>
+          <button type="button" onclick="loadServiceDetail('binhoxy')" class="btn-card btn-secondary">ĐẶT THUÊ BÌNH OXY</button>
+        </div>
+        <div class="service-card sos-card">
+          <div>
+            <div class="card-badge badge-red">Khẩn cấp 24/7</div>
+            <h3 style="font-size:22px;font-weight:900;margin-bottom:12px">Gọi Xe Cấp Cứu Nhanh</h3>
+            <p class="card-sub-text">Điều xe cấp cứu trang bị đầy đủ máy thở, bình oxy và kíp y bác sĩ đi kèm khẩn cấp:</p>
+            <ul class="task-list">
+              <li><i class="fa-solid fa-circle-check"></i> Có mặt tận nơi trong 10 - 15 phút</li>
+              <li><i class="fa-solid fa-circle-check"></i> Hỗ trợ bình Oxy & Monitor suốt lộ trình</li>
+            </ul>
+          </div>
+          <button type="button" onclick="loadServiceDetail('xecuuThuong')" class="btn-sos"><i class="fa-solid fa-phone-volume"></i> BÁO CẤP CỨU 24/7</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-title-box"><span class="sub-title">MUA SẮM & CHO THUÊ</span><h2 class="main-sec-title">Sản Phẩm & Thiết Bị Y Tế Tận Nhà</h2></div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <section id="blog" class="blog-section">
+    <div class="container">
+      <div class="section-title-box"><span class="sub-title">GÓC TƯ VẤN Y KHOA</span><h2 class="main-sec-title">Bài Viết Tư Vấn & Cẩm Nang Sức Khỏe</h2></div>
+      <div class="blog-grid">
+        <div class="blog-featured">
+          <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=800" alt="Blog 1">
+          <div class="blog-content">
+            <span class="badge">Dinh Dưỡng Bệnh Lý</span>
+            <h3 style="font-size:22px;font-weight:800;margin:12px 0">Hướng dẫn quy trình cho người bệnh ăn qua ống Sonde an toàn tại nhà</h3>
+            <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:16px">Tư vấn từ Bác sĩ Dinh dưỡng về cách pha súp chuẩn calo, kiểm tra vị trí ống Sonde và phòng tránh nhiễm trùng đường tiêu hóa.</p>
+            <small style="color:var(--text-muted);font-weight:700">Tham vấn: BS. Lê Hoàng Quân • 6 phút đọc</small>
+          </div>
+        </div>
+        <div class="blog-sidebar">
+          <div class="blog-mini-card"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200" alt=""><div><span class="tag">GIẤC NGỦ</span><h4 style="font-size:14px;font-weight:800;margin-top:4px">Giải pháp cải thiện giấc ngủ sâu cho người cao tuổi không dùng thuốc tây</h4></div></div>
+          <div class="blog-mini-card"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=200" alt=""><div><span class="tag">THIẾT BỊ Y TẾ</span><h4 style="font-size:14px;font-weight:800;margin-top:4px">Cách đọc chỉ số SpO2 và Huyết áp trên máy Monitor theo dõi tại nhà</h4></div></div>
+          <div class="blog-mini-card"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=200" alt=""><div><span class="tag">PHỤC HỒI</span><h4 style="font-size:14px;font-weight:800;margin-top:4px">Bài tập phục hồi chức năng xương khớp & dùng đai kéo dãn cột sống</h4></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="staff" class="staff-section">
+    <div class="container">
+      <div class="section-title-box"><span class="sub-title">ĐỘI NGŨ CHUYÊN NGHIỆP</span><h2 class="main-sec-title">Bác Sĩ & Điều Dưỡng Tiêu Biểu</h2></div>
+      <div class="staff-grid">
+        <div class="staff-card"><div class="staff-header" style="background:linear-gradient(135deg,#6366f1,#a855f7)">NM</div><div class="staff-body"><h4 style="font-size:18px;font-weight:800">ĐĐ. Nguyễn Văn Minh</h4><span style="font-size:13px;font-weight:700;color:var(--primary-blue)">Chăm sóc vết thương & Thay băng</span><p style="font-size:12.5px;color:var(--text-muted);margin-top:6px">10 năm kinh nghiệm</p></div></div>
+        <div class="staff-card"><div class="staff-header" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">TL</div><div class="staff-body"><h4 style="font-size:18px;font-weight:800">ĐĐ. Trần Thị Lan</h4><span style="font-size:13px;font-weight:700;color:var(--primary-blue)">Nhi Khoa & Dinh dưỡng Sonde</span><p style="font-size:12.5px;color:var(--text-muted);margin-top:6px">8 năm kinh nghiệm</p></div></div>
+        <div class="staff-card"><div class="staff-header" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">HQ</div><div class="staff-body"><h4 style="font-size:18px;font-weight:800">BS. Lê Hoàng Quân</h4><span style="font-size:13px;font-weight:700;color:var(--primary-blue)">Phục hồi chức năng</span><p style="font-size:12.5px;color:var(--text-muted);margin-top:6px">15 năm kinh nghiệm</p></div></div>
+        <div class="staff-card"><div class="staff-header" style="background:linear-gradient(135deg,#10b981,#059669)">PH</div><div class="staff-body"><h4 style="font-size:18px;font-weight:800">ĐĐ. Phạm Thanh Hà</h4><span style="font-size:13px;font-weight:700;color:var(--primary-blue)">Chuyên khoa Truyền dịch & Oxy</span><p style="font-size:12.5px;color:var(--text-muted);margin-top:6px">7 năm kinh nghiệm</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 2. CART ============ -->
+<div id="cartPage" class="page-section cart-page-section">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <h1 class="cart-header-title"><i class="fa-solid fa-cart-shopping" style="color:var(--primary-blue)"></i> GIỎ HÀNG CỦA BẠN</h1>
+      <button type="button" onclick="goHomeAnchor('products')" style="background:none;border:none;color:var(--primary-blue);font-weight:800;cursor:pointer;font-size:14px"><i class="fa-solid fa-arrow-left"></i> Tiếp tục chọn sản phẩm</button>
+    </div>
+    <div class="cart-page-grid">
+      <div class="cart-card"><div id="cartContentArea"></div></div>
+      <div class="cart-card" style="height:fit-content">
+        <h3 style="font-size:19px;font-weight:900;margin-bottom:20px">Tóm Tắt Đơn Hàng</h3>
+        <div class="summary-box">
+          <div class="summary-row"><span>Tạm tính sản phẩm:</span><span id="cartSubtotal" style="font-weight:800;color:var(--navy-dark)">0 VNĐ</span></div>
+          <div class="summary-row"><span>Phí giao hàng tận nhà:</span><span style="color:var(--accent-green);font-weight:800">MIỄN PHÍ</span></div>
+          <div class="summary-row summary-total"><span>TỔNG TIỀN:</span><span class="total-price" id="cartTotal">0 VNĐ</span></div>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="font-size:13.5px;font-weight:800;display:block;margin-bottom:8px">Hình thức thanh toán:</label>
+          <select id="payMethodSelect" class="form-control" style="font-weight:700">
+            <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+            <option value="BANK">Chuyển khoản QR Ngân hàng</option>
+          </select>
+        </div>
+        <button type="button" onclick="checkoutCartPage()" class="btn-checkout-page"><i class="fa-solid fa-shield-heart"></i> XÁC NHẬN ĐẶT HÀNG NGAY</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3. SERVICE DETAIL + BOOKING ============ -->
+<div id="serviceDetailPage" class="page-section">
+  <section class="service-banner-section" id="bookingSection">
+    <div class="container">
+      <div class="booking-hero-card">
+        <div class="booking-header-bar">
+          <div>
+            <h2 class="booking-hero-title" id="detailBannerTitle"><i class="fa-solid fa-user-nurse"></i> ĐẶT CA ĐIỀU DƯỠNG & HỘ LÝ TẬN NHÀ</h2>
+            <p class="booking-hero-sub">Hệ thống phân công Y tá & Điều dưỡng chuẩn y khoa 24/7 – Chọn ca trực & lịch hẹn sát với nhu cầu</p>
+          </div>
+          <div class="booking-badge-group">
+            <span class="booking-hero-badge"><i class="fa-solid fa-certificate"></i> 100% Có Bằng Cấp & Chứng Chỉ</span>
+            <span class="booking-hero-badge"><i class="fa-solid fa-bolt"></i> Có Mặt Trong 30 Phút</span>
+          </div>
+        </div>
+
+        <div class="wz-layout" id="wzLayoutGrid">
+          <div class="wz-main">
+            <ol class="wz-steps" id="wzSteps">
+              <li data-step="1"><b>1</b><span>Chuyên môn</span></li>
+              <li data-step="2"><b>2</b><span>Thời gian</span></li>
+              <li data-step="3"><b>3</b><span>Người chăm sóc</span></li>
+              <li data-step="4"><b>4</b><span>Liên hệ & Thanh toán</span></li>
+            </ol>
+            <div class="wz-panel" id="wzPanel"></div>
+            <div class="wz-error" id="wzError"></div>
+            <div class="wz-nav" id="wzNav">
+              <button type="button" id="wzBack" class="wz-btn-back"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
+              <button type="button" id="wzNext" class="wz-btn-next">Tiếp tục</button>
+            </div>
+          </div>
+          
+          <aside class="wz-summary" id="wzSummaryBox">
+            <h4><i class="fa-solid fa-receipt"></i> Tóm tắt đơn đặt ca</h4>
+            <div id="wzSummaryRows"></div>
+            <div id="wzPriceBreakdown" class="wz-price-breakdown"></div>
+            <div class="wz-total"><span>TỔNG TIỀN TẠM TÍNH</span><strong id="wzTotal">--</strong></div>
+            <div id="wzDiscount" class="wz-disc"></div>
+            <p class="wz-note"><i class="fa-solid fa-shield-halved"></i> 100% y tá có CCHN Bộ Y Tế · Đổi người nếu không hài lòng · BBCare gọi xác nhận trước khi y tá di chuyển.</p>
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="container service-layout-grid">
+    <main class="detail-article-card">
+      <h1 class="detail-header-title" id="detailMainTitle"></h1>
+      <div class="divider-line"></div>
+      <div class="article-body-content" id="detailMainContent"></div>
+    </main>
+    <aside>
+      <div class="why-choose-sidebar" style="margin-bottom:24px">
+        <div class="why-choose-header"><div class="why-choose-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="why-choose-title">TẠI SAO CHỌN HOMECARE BBCARE</div></div>
+        <ul class="why-choose-list"><li>Nhân viên giàu y đức và kinh nghiệm</li><li>Chăm sóc chu đáo, tận tình 24/7</li><li>Trang thiết bị hiện đại, an toàn</li><li>Dịch vụ nhanh chóng, chủ động</li><li>Bảo hiểm tài sản cho gia đình bạn</li></ul>
+      </div>
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title"><i class="fa-solid fa-hospital-user"></i> Các Dịch Vụ Khác</div>
+        <ul class="sidebar-links-list">
+          <li><a onclick="loadServiceDetail('xecuuThuong')"><i class="fa-solid fa-chevron-right"></i> Dịch Vụ Xe Cứu Thương Chuyển Viện</a></li>
+          <li><a onclick="loadServiceDetail('binhoxy')"><i class="fa-solid fa-chevron-right"></i> Cho Thuê Bình Oxy Giá Rẻ</a></li>
+          <li><a onclick="loadServiceDetail('dieuduong')"><i class="fa-solid fa-chevron-right"></i> Đặt Ca Điều Dưỡng & Hộ Lý Tận Nhà</a></li>
+          <li><a onclick="loadServiceDetail('tuVanSucKhoe')"><i class="fa-solid fa-chevron-right"></i> Tư Vấn Sức Khỏe Bệnh Nhân</a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+</div>
+
+<!-- ============ 4. PROFILE ============ -->
+<div id="profilePage" class="page-section profile-page-section">
+  <main class="page-container">
+    <header class="page-header"><h1><i class="fa-solid fa-heart-pulse"></i> HỒ SƠ SỨC KHỎE & QUẢN LÝ LỊCH HẸN</h1></header>
+    <section class="content-grid">
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-user-doctor"></i> Sinh Hiệu Bệnh Nhân</h2>
+        <div class="vitals-box">
+          <div class="vital-item"><span>Huyết áp hiện tại:</span><strong>120/80 mmHg</strong><span class="status-ok"><i class="fa-solid fa-circle-check"></i> Trạng thái: Ổn định</span></div>
+          <div class="vital-item"><span>Nhịp tim đo được:</span><strong>75 nhịp/phút</strong></div>
+          <div class="vital-item"><span>Nồng độ SpO2 trong máu:</span><strong class="spo2-text">98%</strong></div>
+        </div>
+        <button type="button" class="btn btn-primary btn-full" onclick="alert('Đã gửi yêu cầu đo chỉ số sinh hiệu mới đến y tá trực!')"><i class="fa-solid fa-rotate-right"></i> CẬP NHẬT CHỈ SỐ MỚI</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title"><i class="fa-solid fa-calendar-days"></i> Danh Sách Lịch Hẹn Đã Đặt</h2>
+        <div class="table-responsive">
+          <table class="appointment-table">
+            <thead><tr><th>Mã ca</th><th>Dịch vụ / Điều dưỡng phụ trách</th><th>Trạng thái</th><th style="text-align:center">Thao tác</th></tr></thead>
+            <tbody id="appointmentListTable">
+              <tr>
+                <td><strong>APP-101</strong></td>
+                <td><div class="service-name">Thay băng & Rửa vết thương</div><div class="nurse-name"><i class="fa-solid fa-user-nurse"></i> ĐĐ. Nguyễn Văn Minh</div></td>
+                <td><span class="badge-success"><i class="fa-solid fa-circle-check"></i> Đã hoàn thành</span></td>
+                <td style="text-align:center"><button type="button" class="btn btn-warning" onclick="alert('Cảm ơn bạn đã đánh giá dịch vụ!')"><i class="fa-solid fa-star"></i> Đánh giá</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ 5. RECRUITMENT ============ -->
+<div id="recruitmentPage" class="page-section">
+  <section class="recruitment-hero">
+    <div class="container">
+      <span class="hero-tag"><i class="fa-solid fa-user-doctor"></i> GIA NHẬP ĐỘI NGŨ BBCARE</span>
+      <h1 style="font-size:38px;font-weight:900;margin-top:10px">Tuyển Dụng Y / Bác Sĩ, Điều Dưỡng & Hộ Lý</h1>
+      <p style="font-size:16px;font-weight:600;color:#e0f2fe;max-width:800px;margin:15px auto 0">Gia nhập mạng lưới Y tế Homecare hàng đầu tại Đà Nẵng với thu nhập hấp dẫn, môi trường làm việc nhân văn và giờ giấc linh hoạt!</p>
+    </div>
+  </section>
+  <div class="container recruitment-grid">
+    <div>
+      <div class="perks-box">
+        <h3 style="font-size:20px;font-weight:900;color:var(--primary-blue);margin-bottom:12px"><i class="fa-solid fa-gift"></i> Quyền Lợi & Đãi Ngộ Dành Cho Nhân Viên</h3>
+        <ul class="bullet-list">
+          <li>Lương thưởng cạnh tranh: Mức thu nhập từ 12.000.000đ - 25.000.000đ / tháng (tùy ca trực).</li>
+          <li>Chủ động thời gian: Đăng ký ca trực linh hoạt theo lịch cá nhân (Theo lượt / Theo ca / 24/24).</li>
+          <li>Phụ cấp xăng xe, điện thoại & Bảo hiểm rủi ro tài sản khi làm việc tại gia đình bệnh nhân.</li>
+          <li>Được tham gia các khóa tập huấn nâng cao nghiệp vụ và cấp chứng chỉ chuẩn Y khoa.</li>
+        </ul>
+      </div>
+      <h2 style="font-size:24px;font-weight:900;margin-bottom:20px">Vị Trí Đang Tuyển Dụng Hot</h2>
+      <div class="job-card">
+        <div class="job-header"><div><h3 class="job-title">1. Điều Dưỡng Viên Chăm Sóc Tại Nhà (Toàn thời gian / Bán thời gian)</h3><p style="font-size:13.5px;color:var(--primary-blue);font-weight:700;margin-top:4px">Số lượng: 10 Nhân viên</p></div><span class="job-salary">12 - 18 Triệu / tháng</span></div>
+        <div class="job-meta"><span><i class="fa-solid fa-location-dot"></i> TP. Đà Nẵng</span><span><i class="fa-solid fa-briefcase"></i> Yêu cầu: Tốt nghiệp Trung cấp/Cao đẳng/Đại học Y Dược</span></div>
+        <p style="font-size:14.5px;color:#475569;margin-bottom:16px">Mô tả: Thực hiện các ca trực chăm sóc bệnh nhân tại nhà (thay băng, truyền dịch, cho ăn qua ống Sonde, theo dõi sinh hiệu, vật lý trị liệu nhẹ).</p>
+        <button type="button" class="btn-card" style="width:auto;padding:10px 24px" onclick="scrollToApplyForm('Điều Dưỡng Viên Tận Nhà')"><i class="fa-solid fa-paper-plane"></i> ỨNG TUYỂN NGAY</button>
+      </div>
+      <div class="job-card">
+        <div class="job-header"><div><h3 class="job-title">2. Hộ Lý Chăm Sóc Bệnh Nhân & Người Cao Tuổi</h3><p style="font-size:13.5px;color:var(--primary-blue);font-weight:700;margin-top:4px">Số lượng: 15 Nhân viên</p></div><span class="job-salary">9 - 15 Triệu / tháng</span></div>
+        <div class="job-meta"><span><i class="fa-solid fa-location-dot"></i> TP. Đà Nẵng</span><span><i class="fa-solid fa-briefcase"></i> Yêu cầu: Nhanh nhẹn, trung thực, có kinh nghiệm chăm sóc</span></div>
+        <p style="font-size:14.5px;color:#475569;margin-bottom:16px">Mô tả: Hỗ trợ sinh hoạt hàng ngày cho người bệnh (tắm rửa, thay quần áo/tã, nâng dìu đi lại, hỗ trợ ăn uống và trò chuyện chăm sóc).</p>
+        <button type="button" class="btn-card" style="width:auto;padding:10px 24px" onclick="scrollToApplyForm('Hộ Lý Chăm Sóc')"><i class="fa-solid fa-paper-plane"></i> ỨNG TUYỂN NGAY</button>
+      </div>
+    </div>
+    <aside>
+      <div class="sidebar-widget" id="applyFormBox" style="position:sticky;top:90px">
+        <div class="sidebar-widget-title" style="border-bottom-color:var(--warning-orange)"><i class="fa-solid fa-file-signature" style="color:var(--warning-orange)"></i> NỘP HỒ SƠ ỨNG TUYỂN</div>
+        <form onsubmit="handleRecruitmentSubmit(event)">
+          <div class="form-group"><label>Họ và tên ứng viên *</label><input type="text" class="form-control" placeholder="Nguyễn Văn A" required></div>
+          <div class="form-group"><label>Số điện thoại liên hệ *</label><input type="tel" class="form-control" placeholder="0905 xxx xxx" required></div>
+          <div class="form-group"><label>Vị trí ứng tuyển *</label>
+            <select id="applyJobSelect" class="form-control" required style="font-weight:700">
+              <option value="Điều Dưỡng Viên Tận Nhà">Điều Dưỡng Viên Tận Nhà</option>
+              <option value="Hộ Lý Chăm Sóc">Hộ Lý Chăm Sóc Sinh Hoạt</option>
+              <option value="Bác Sĩ PHCN">Bác Sĩ Phục Hồi Chức Năng</option>
+              <option value="Kỹ Thuật Viên Oxy">Kỹ Thuật Viên Thiết Bị Y Tế</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Trình độ / Bằng cấp chuyên môn *</label><input type="text" class="form-control" placeholder="Ví dụ: Cử nhân Điều Dưỡng / Sơ cấp Hộ lý" required></div>
+          <div class="form-group"><label>Kinh nghiệm làm việc (số năm)</label><input type="text" class="form-control" placeholder="Ví dụ: 3 năm chăm sóc người già"></div>
+          <button type="submit" class="btn-card" style="background:linear-gradient(135deg,#f97316,#ea580c)"><i class="fa-solid fa-paper-plane"></i> GỬI HỒ SƠ ỨNG TUYỂN</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ============ 6. ACCOUNT ============ -->
+<div id="accountPage" class="page-section account-page-section">
+  <div class="container">
+    <h1 style="font-size:28px;font-weight:900;text-transform:uppercase"><i class="fa-solid fa-circle-user" style="color:var(--primary-blue)"></i> QUẢN LÝ TÀI KHOẢN CÁ NHÂN</h1>
+    <div class="account-grid">
+      <aside class="account-sidebar">
+        <div class="user-profile-header">
+          <div class="user-avatar-large" id="accAvatarChar">A</div>
+          <h3 id="accDisplayName" style="font-size:18px;font-weight:900">NGUYỄN VĂN AN</h3>
+          <p id="accDisplayPhone" style="font-size:13px;color:var(--text-muted);font-weight:600">SĐT: 0908786168</p>
+        </div>
+        <ul class="account-menu-list">
+          <li class="account-menu-item active" onclick="switchAccTab('profile',this)"><i class="fa-solid fa-user"></i> Thông tin cá nhân</li>
+          <li class="account-menu-item" onclick="switchAccTab('orders',this)"><i class="fa-solid fa-boxes-packing"></i> Lịch sử đơn hàng</li>
+          <li class="account-menu-item" onclick="switchAccTab('booking',this)"><i class="fa-solid fa-calendar-check"></i> Ca trực y tế đã đặt</li>
+          <li class="account-menu-item" onclick="switchAccTab('password',this)"><i class="fa-solid fa-key"></i> Đổi mật khẩu</li>
+          <li class="account-menu-item" onclick="logoutAccount()" style="color:#ef4444"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất tài khoản</li>
+        </ul>
+      </aside>
+      <main class="account-content-card">
+        <div id="accTabProfile">
+          <h2 class="acc-h2">Hồ Sơ Cá Nhân</h2>
+          <form onsubmit="saveAccProfile(event)">
+            <div class="form-grid-4" style="grid-template-columns:1fr 1fr">
+              <div class="form-group"><label>Họ và tên *</label><input type="text" id="accInputName" class="form-control" value="Nguyễn Văn An" required></div>
+              <div class="form-group"><label>Số điện thoại *</label><input type="tel" id="accInputPhone" class="form-control" value="0908786168" required></div>
+            </div>
+            <div class="form-grid-4" style="grid-template-columns:1fr 1fr">
+              <div class="form-group"><label>Email liên hệ</label><input type="email" class="form-control" value="nguyenvanan@gmail.com"></div>
+              <div class="form-group"><label>Ngày sinh</label><input type="date" class="form-control" value="1988-05-15"></div>
+            </div>
+            <div class="form-group"><label>Địa chỉ nhận dịch vụ mặc định</label><input type="text" class="form-control" value="Lô 02-B2-05 Hoàng Trung Thông, Q. Liên Chiểu, Đà Nẵng"></div>
+            <button type="submit" class="btn-card" style="width:auto;padding:12px 30px"><i class="fa-solid fa-floppy-disk"></i> LƯU THAY ĐỔI</button>
+          </form>
+        </div>
+        <div id="accTabOrders" style="display:none">
+          <h2 class="acc-h2">Lịch Sử Đơn Hàng Mua Sắm</h2>
+          <div class="table-responsive"><table class="appointment-table">
+            <thead><tr><th>Mã đơn</th><th>Sản phẩm / Số lượng</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead>
+            <tbody><tr><td><strong>#ORD-9921</strong></td><td>TPCN Hỗ Trợ Xương Khớp (x1)</td><td style="font-weight:800;color:var(--primary-blue)">350.000 VNĐ</td><td><span class="badge-success">Đã giao thành công</span></td></tr></tbody>
+          </table></div>
+        </div>
+        <div id="accTabBooking" style="display:none">
+          <h2 class="acc-h2">Dịch Vụ & Ca Trực Đã Đặt</h2>
+          <p style="font-size:14.5px;color:var(--text-muted);margin-bottom:16px">Vui lòng chuyển sang trang Hồ sơ sức khỏe để xem và quản lý chi tiết lịch hẹn y tế.</p>
+          <button type="button" onclick="navigateTo('profilePage')" class="btn-card" style="width:auto;padding:12px 28px"><i class="fa-solid fa-id-card-clip"></i> MỞ HỒ SƠ SỨC KHỎE</button>
+        </div>
+        <div id="accTabPassword" style="display:none">
+          <h2 class="acc-h2">Đổi Mật Khẩu Bảo Mật</h2>
+          <form onsubmit="event.preventDefault();alert('🎉 Đổi mật khẩu thành công!');this.reset();">
+            <div class="form-group" style="max-width:450px"><label>Mật khẩu hiện tại *</label><input type="password" class="form-control" required></div>
+            <div class="form-group" style="max-width:450px"><label>Mật khẩu mới *</label><input type="password" class="form-control" required></div>
+            <div class="form-group" style="max-width:450px"><label>Xác nhận mật khẩu mới *</label><input type="password" class="form-control" required></div>
+            <button type="submit" class="btn-card" style="width:auto;padding:12px 30px"><i class="fa-solid fa-key"></i> CẬP NHẬT MẬT KHẨU</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- FLOAT -->
+<div class="floating-contact-widget">
+  <a href="tel:0908786168" class="float-btn" title="Gọi điện"><i class="fa-solid fa-phone"></i></a>
+  <a href="#" class="float-btn btn-zalo" title="Zalo">Zalo</a>
+  <a href="#" class="float-btn" title="Bản đồ"><i class="fa-solid fa-location-dot"></i></a>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact" class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>CÔNG TY TNHH HOMECARE BBCare</h3>
+      <p style="font-size:14px;margin-bottom:16px">Trung tâm dịch vụ chăm sóc sức khỏe tại nhà uy tín hàng đầu. Cam kết mang đến sự tận tâm, chuyên nghiệp và chuẩn mực y tế tốt nhất.</p>
+      <p style="font-size:14px"><i class="fa-solid fa-location-dot" style="color:var(--primary-blue)"></i> Lô 02-B2-05 Hoàng Trung Thông, Q. Liên Chiểu, TP. Đà Nẵng</p>
+      <p style="font-size:14px;margin-top:8px"><i class="fa-solid fa-phone" style="color:var(--primary-blue)"></i> Hotline: 0908.786.168 - 1900.1234</p>
+    </div>
+    <div>
+      <h4>DỊCH VỤ Y TẾ</h4>
+      <ul>
+        <li><a onclick="loadServiceDetail('binhoxy')">Cho thuê bình Oxy tận nhà</a></li>
+        <li><a onclick="openBooking()">Đặt ca Y tá / Điều dưỡng & Hộ lý</a></li>
+        <li><a onclick="loadServiceDetail('xecuuThuong')">Xe cấp cứu khẩn cấp 24/7</a></li>
+        <li><a onclick="loadServiceDetail('tuVanSucKhoe')">Tư vấn sức khỏe tại nhà</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>THÔNG TIN</h4>
+      <ul>
+        <li><a onclick="goHomeAnchor('about-story')">Câu chuyện BBCare</a></li>
+        <li><a onclick="navigateTo('recruitmentPage')">Tuyển dụng Y Bác sĩ</a></li>
+        <li><a href="#">Chính sách bảo mật</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="text-align:center;border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:13px"><p>© 2026 BBCare Homecare, Jsc. All rights reserved.</p></div>
+</footer>
+
+<!-- MODALS -->
+<div id="bookingModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header"><h3 style="font-size:20px;font-weight:800">ĐẶT LỊCH TƯ VẤN Y TẾ KHẨN CẤP</h3><button type="button" onclick="closeModal('bookingModal')" class="close-btn">✕</button></div>
+    <form onsubmit="handleConsultSubmit(event)">
+      <div class="form-group"><label>Họ và tên khách hàng/bệnh nhân *</label><input type="text" class="form-control" placeholder="Nguyễn Văn A" required></div>
+      <div class="form-group"><label>Số điện thoại liên hệ *</label><input type="tel" class="form-control" placeholder="0901 234 567" required></div>
+      <div class="form-group"><label>Địa chỉ nhận dịch vụ *</label><input type="text" class="form-control" placeholder="Số nhà, tên đường, quận/huyện..." required></div>
+      <button type="submit" class="btn-card">XÁC NHẬN ĐẶT LỊCH Y TẾ</button>
+    </form>
+  </div>
+</div>
+
+<div id="nurseProfileModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header"><h3 style="font-size:18px;font-weight:800">HỒ SƠ NĂNG LỰC NHÂN VIÊN</h3><button type="button" onclick="closeModal('nurseProfileModal')" class="close-btn">✕</button></div>
+    <div class="nurse-detail-modal-header" style="display:flex;gap:16px;align-items:center;margin-bottom:16px">
+      <img src="" id="modalNurseAvatar" class="nurse-avatar" style="width:70px;height:70px" alt="Avatar">
+      <div>
+        <h3 id="modalNurseName" style="font-size:18px;font-weight:900;color:var(--primary-blue)">--</h3>
+        <span id="modalNurseSpec" style="font-size:13px;font-weight:700;color:var(--accent-green)">--</span>
+        <div id="modalNurseExp" style="font-size:12px;color:var(--text-muted);margin-top:2px">--</div>
+      </div>
+    </div>
+    <div class="detail-item-title"><i class="fa-solid fa-award"></i> Chứng chỉ & Bằng cấp chuyên khoa:</div><div id="modalNurseCerts" class="detail-item-desc" style="font-size:13px;margin-bottom:10px">--</div>
+    <div class="detail-item-title"><i class="fa-solid fa-list-check"></i> Nghiệp vụ chuyên môn chính:</div><div id="modalNurseSkills" class="detail-item-desc" style="font-size:13px;margin-bottom:10px">--</div>
+    <div class="detail-item-title"><i class="fa-solid fa-comment-dots"></i> Đánh giá từ người bệnh:</div>
+    <div id="modalNurseReview" class="detail-item-desc" style="font-style:italic;background:#f8fafc;padding:10px;border-radius:10px;margin-top:4px;font-size:12.5px">--</div>
+    <button type="button" id="modalSelectBtn" class="btn-card" style="margin-top:18px;padding:11px">CHỌN NHÂN VIÊN NÀY CHO CA TRỰC</button>
+  </div>
+</div>
+
+<div id="authModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header"><h3 style="font-size:20px;font-weight:800;color:var(--primary-blue)"><i class="fa-solid fa-user-shield"></i> TÀI KHOẢN KHÁCH HÀNG</h3><button type="button" onclick="closeModal('authModal')" class="close-btn">✕</button></div>
+    <div class="auth-tab-box">
+      <div id="tabLoginBtn" class="auth-tab active" onclick="switchAuthTab('login')">ĐĂNG NHẬP</div>
+      <div id="tabRegisterBtn" class="auth-tab" onclick="switchAuthTab('register')">ĐĂNG KÝ MỚI</div>
+    </div>
+    <form id="loginForm" onsubmit="handleAuthSubmit(event,'login')">
+      <div class="form-group"><label>Số điện thoại hoặc Email *</label><input type="text" class="form-control" placeholder="Nhập SĐT hoặc Email" required></div>
+      <div class="form-group"><label>Mật khẩu *</label><input type="password" class="form-control" placeholder="••••••••" required></div>
+      <button type="submit" class="btn-card" style="margin-top:10px">ĐĂNG NHẬP</button>
+    </form>
+    <form id="registerForm" style="display:none" onsubmit="handleAuthSubmit(event,'register')">
+      <div class="form-group"><label>Họ và tên *</label><input type="text" class="form-control" id="regName" placeholder="Nhập họ tên của bạn" required></div>
+      <div class="form-group"><label>Số điện thoại *</label><input type="tel" class="form-control" placeholder="Nhập số điện thoại" required></div>
+      <div class="form-group"><label>Mật khẩu *</label><input type="password" class="form-control" placeholder="Tạo mật khẩu mới" required></div>
+      <button type="submit" class="btn-card" style="margin-top:10px;background:linear-gradient(135deg,#10b981,#059669)">TẠO TÀI KHOẢN</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   1. DỮ LIỆU CƠ BẢN
+========================================================= */
+let isLoggedIn = false;
+let currentUser = { name: 'Nguyễn Văn An', phone: '0908786168' };
+
+const SHIFTS_DATA = {
+  LUOT:{key:'LUOT',name:'Theo Lượt / Thủ Thuật Nhanh',badgeText:'Thủ thuật nhanh',timeRange:'15 – 45 phút / lần',icon:'fa-solid fa-stopwatch',price:200000,unit:'lượt',desc:'Thay băng vết mổ, rửa vết thương, cắt chỉ, tiêm thuốc, truyền dịch y khoa theo đơn, đặt sonde.'},
+  CA_SANG_4H:{key:'CA_SANG_4H',name:'Ca Sáng (07:30 – 11:30)',badgeText:'Bán ngày sáng (4h)',timeRange:'07:30 – 11:30 (4 tiếng)',icon:'fa-regular fa-sun',price:350000,unit:'ca',desc:'Vệ sinh cá nhân sáng, hỗ trợ bữa ăn sáng, đo chỉ số sinh hiệu (SpO2, HA) & cho uống thuốc đúng cữ.'},
+  CA_CHIEU_4H:{key:'CA_CHIEU_4H',name:'Ca Chiều (13:30 – 17:30)',badgeText:'Bán ngày chiều (4h)',timeRange:'13:30 – 17:30 (4 tiếng)',icon:'fa-solid fa-cloud-sun',price:350000,unit:'ca',desc:'Vệ sinh chiều, hỗ trợ ăn xế/tối, tập vận động nhẹ, xoa bóp cơ khớp, đo sinh hiệu & uống thuốc chiều.'},
+  CA_8H:{key:'CA_8H',name:'Ca Hành Chính (08:00 – 16:00)',badgeText:'Được chọn nhiều nhất',timeRange:'08:00 – 16:00 (8 tiếng)',icon:'fa-solid fa-briefcase-medical',price:600000,unit:'ca',desc:'Chăm sóc trọn vẹn cả ngày làm việc: ăn uống, vệ sinh chống loét, thuốc thang, theo dõi sinh hiệu liên tục.'},
+  CA_DEM_12H:{key:'CA_DEM_12H',name:'Ca Đêm (19:00 – 07:00 sáng)',badgeText:'Trực đêm chuyên sâu',timeRange:'19:00 – 07:00 (12 tiếng)',icon:'fa-solid fa-moon',price:800000,unit:'ca',desc:'Túc trực thâu đêm theo dõi máy Monitor, SpO2, lật trở bệnh nhân chống loét mỗi 2 tiếng, canh thở oxy.'},
+  CA_NGAY_12H:{key:'CA_NGAY_12H',name:'Ca Ngày 12 Tiếng (07:00 – 19:00)',badgeText:'Hồi sức & Hậu phẫu',timeRange:'07:00 – 19:00 (12 tiếng)',icon:'fa-solid fa-sun',price:800000,unit:'ca',desc:'Chăm sóc toàn diện từ sáng sớm đến tối cho bệnh nhân vừa phẫu thuật, tai biến nặng hoặc già yếu.'},
+  CA_24H:{key:'CA_24H',name:'Trọn Gói 24/24 Tại Nhà / Bệnh Viện',badgeText:'Toàn diện 24/7',timeRange:'24/24h (Ăn ở tại chỗ)',icon:'fa-solid fa-house-chimney-medical',price:1400000,unit:'ngày',desc:'Điều dưỡng / Hộ lý ở lại tại chỗ chăm sóc 24/24h liên tục, giải quyết toàn bộ nhu cầu y tế & sinh hoạt.'}
+};
+
+const WZ_SKILLS=[
+  {k:'thay_bang',n:'Thay băng & cắt chỉ',d:'Rửa vết mổ, vết loét, cắt chỉ vô trùng',i:'fa-bandage',basePrice:150000},
+  {k:'truyen_dich',n:'Tiêm & truyền dịch',d:'Truyền nước, đạm, vitamin theo đơn bác sĩ',i:'fa-syringe',basePrice:200000},
+  {k:'cho_an_sonde',n:'Cho ăn qua ống Sonde',d:'Bơm thức ăn, rửa & vệ sinh ống sonde',i:'fa-utensils',basePrice:180000},
+  {k:'phuc_hoi',n:'Phục hồi chức năng',d:'Tập đi lại, vật lý trị liệu, xoa bóp cơ',i:'fa-child-reaching',basePrice:250000},
+  {k:'ho_tro_oxy',n:'Theo dõi sinh hiệu & thở Oxy',d:'Canh monitor, SpO2, huyết áp liên tục',i:'fa-lungs',basePrice:200000},
+  {k:'ho_ly_sinh_hoat',n:'Hộ lý sinh hoạt',d:'Tắm rửa, thay tã, dìu đi lại & cho ăn',i:'fa-hands-holding-child',basePrice:150000}
+];
+
+const WZ_PATIENT=[['WALK','🚶 Tự đi lại được'],['WHEELCHAIR','🦽 Xe lăn / yếu sức'],['BEDRIDDEN','🛏️ Nằm liệt giường'],['VENTILATOR','🫁 Thở Oxy / có ống thông']];
+
+const NURSES_DATABASE = [
+ {id:'N01',name:'ĐĐ. Nguyễn Văn Minh',spec:'Chuyên Khoa Ngoại & Vết Thương Mổ',exp:'10 năm kinh nghiệm',rating:4.9,reviewsCount:128,avatar:'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=300',certs:'Cử nhân Điều dưỡng ĐH Y Dược',skills:'Thạo cắt chỉ vết mổ, rửa vết thương, truyền dịch y khoa',topReview:'"Anh Minh làm rất mát tay, rửa vết thương không đau."' },
+ {id:'N02',name:'ĐĐ. Trần Thị Lan',spec:'Nhi Khoa & Chăm Sóc Ống Sonde',exp:'8 năm kinh nghiệm',rating:5.0,reviewsCount:95,avatar:'https://images.unsplash.com/photo-1594824813566-78a933f2614d?auto=format&fit=crop&q=80&w=300',certs:'Chứng chỉ Nhi khoa nâng cao',skills:'Cho ăn qua ống Sonde, truyền dịch, chăm sóc trẻ nhỏ',topReview:'"Chị Lan rất kiên nhẫn khi cho cụ ăn qua ống Sonde."' },
+ {id:'N03',name:'BS. Lê Hoàng Quân',spec:'Phục Hồi Chức Năng & VLTL',exp:'15 năm kinh nghiệm',rating:4.9,reviewsCount:110,avatar:'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=300',certs:'Bác sĩ Chuyên khoa PHCN',skills:'Vật lý trị liệu, tập đi sau mổ, bấm huyệt',topReview:'"Bài tập của bác sĩ Quân giúp ông phục hồi tai biến rất nhanh."' },
+ {id:'N04',name:'ĐĐ. Phạm Thanh Hà',spec:'Hồi Sức Cấp Cứu & Trực Đêm Oxy',exp:'7 năm kinh nghiệm',rating:4.8,reviewsCount:82,avatar:'https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=300',certs:'Chứng chỉ BLS/ACLS',skills:'Vận hành bình Oxy, máy thở, canh Monitor',topReview:'"Yên tâm khi giao ca đêm cho cô Hà."' }
+];
+
+const PRODUCTS = [
+ {title:'TPCN Hỗ Trợ Xương Khớp',full:'TPCN Hỗ Trợ Xương Khớp & Dịch Khớp',tag:'Thực phẩm chức năng',price:350000,priceText:'350.000 VNĐ',img:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=400',rent:false},
+ {title:'Vitamin Tổng Hợp Cho Trẻ',full:'Vitamin Tổng Hợp Phát Triển Cho Trẻ',tag:'Dinh dưỡng Nhi khoa',price:220000,priceText:'220.000 VNĐ',img:'https://production-cdn.pharmacity.io/digital/828x828/plain/e-com/images/product/20260811072311-0-P00776_1.png?versionId=14phBj5cvX08HIptRChCEjgE1R.4O_ls',rent:false},
+ {title:'Thuê Bình Oxy 10L (1 ngày)',full:'Cho Thuê Bình Oxy 10L - 40L Tận Nhà',tag:'Dịch vụ cho thuê',price:200000,priceText:'200.000 VNĐ / ngày',img:'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=400',rent:true},
+ {title:'Đai Kéo Dãn Cột Sống',full:'Đai Kéo Dãn Cột Sống & Bó Gối Trị Liệu',tag:'Phụ kiện y khoa',price:450000,priceText:'450.000 VNĐ',img:'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=400',rent:false}
+];
+
+const SERVICES_DATA = {
+ xecuuThuong:{title:'Dịch Vụ Xe Cứu Thương Chuyển Viện Khẩn Cấp',bannerTitle:'<i class="fa-solid fa-truck-medical"></i> ĐẶT XE CẤP CỨU CHUYỂN VIỆN KHẨN CẤP 24/7',content:`<p><strong>Homecare BBCare</strong> cung cấp dịch vụ xe chuyển viện vận chuyển người bệnh khẩn cấp 24/7.</p><h3>Các Trường Hợp Cần Xe Cứu Thương:</h3><ul><li>Chuyển viện tuyến tỉnh/thành phố.</li><li>Đón bệnh nhân xuất viện về nhà an toàn.</li></ul>`},
+ binhoxy:{title:'Dịch Vụ Cho Thuê Bình Oxy & Máy Tạo Oxy Tận Nhà',bannerTitle:'<i class="fa-solid fa-cloud"></i> THUÊ BÌNH OXY & MÁY TẠO OXY TẬN NHÀ 24/7',content:`<p>Cung cấp giải pháp cho thuê bình oxy 10L - 40L tận nhà 24/7 tại Đà Nẵng.</p><h3>Ưu Điểm Dịch Vụ:</h3><ul><li>Oxy tinh khiết 99.5% chuẩn Bộ Y Tế.</li><li>Giao nhanh 15-30 phút.</li></ul>`},
+ dieuduong:{title:'Dịch Vụ Đặt Ca Điều Dưỡng & Hộ Lý Chăm Sóc Tại Nhà',bannerTitle:'<i class="fa-solid fa-user-nurse"></i> ĐẶT CA ĐIỀU DƯỠNG & HỘ LÝ TẬN NHÀ',content:`<p>Chăm sóc người bệnh tại nhà chuyên nghiệp chuẩn y khoa.</p>`},
+ tuVanSucKhoe:{title:'Dịch Vụ Tư Vấn Sức Khỏe & Chăm Sóc Y Tế Tận Nhà',bannerTitle:'<i class="fa-solid fa-comments"></i> TƯ VẤN SỨC KHỎE BỆNH NHÂN TRỰC TUYẾN',content:`<p>Đội ngũ Bác sĩ/Y tá tư vấn sức khỏe miễn phí 24/7.</p>`}
+};
+
+let cart = [
+ {id:1,title:'TPCN Hỗ Trợ Xương Khớp',price:350000,qty:1,img:'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=200'}
+];
+
+const WZ_HOURS=['08:00','09:30','11:00','14:00','15:30','17:00','18:30','20:00'];
+const WZ_NEXT=['Tiếp tục: chọn thời gian','Tiếp tục: chọn người chăm sóc','Tiếp tục: thanh toán & liên hệ','XÁC NHẬN ĐẶT CA'];
+const B = {};
+
+const $ = id => document.getElementById(id);
+const fmt = n => n ? n.toLocaleString('vi-VN') : '0';
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* =========================================================
+   2. HÀM ĐIỀU HƯỚNG TRANG & CHUYỂN MỤC
+========================================================= */
+function navigateTo(pageId){
+  document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('page-active'));
+  const target = $(pageId);
+  if(target){
+    target.classList.add('page-active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  if(pageId==='cartPage') renderCartPage();
+}
+
+function scrollToEl(id){
+  const el = $(id);
+  if(el){ 
+    const navHeight = 60;
+    const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: elementPosition - navHeight, behavior: 'smooth' });
+  }
+}
+
+function goHomeAnchor(id){
+  navigateTo('homePage');
+  setTimeout(()=> scrollToEl(id), 120);
+}
+
+function openModal(id){$(id).classList.add('open');}
+function closeModal(id){$(id).classList.remove('open');}
+
+function scrollToApplyForm(job){
+  navigateTo('recruitmentPage');
+  setTimeout(()=>{
+    const s=$('applyJobSelect'); if(s) s.value=job;
+    scrollToEl('applyFormBox');
+  }, 100);
+}
+
+/* =========================================================
+   3. BẢNG TÍNH GIÁ WIZARD ĐẶT CA
+========================================================= */
+function ymd(off){const d=new Date();d.setDate(d.getDate()+off);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function dmy(s){return s?s.split('-').reverse().join('/'):'';}
+
+function resetBooking(){
+  Object.assign(B,{
+    step:1, selectedSkillKeys:[], patient:'WALK', timeMode:'week', shiftKey:'LUOT',
+    hour:'08:00', dateStr:ymd(0), customDays:3, disc:0, nurseId:'', place:'HOME',
+    paymentMethod:'COD', name:'', phone:'', addr:'', notes:'', code:''
+  });
+}
+
+function nurseObj(){return NURSES_DATABASE.find(n=>n.id===B.nurseId);}
+
+function calculateBookingPrice(overrideMode = null, overrideDays = null){
+  let servicesTotal = 0;
+  const serviceBreakdown = [];
+  B.selectedSkillKeys.forEach(key => {
+    const skill = WZ_SKILLS.find(s => s.k === key);
+    if(skill) { servicesTotal += skill.basePrice; serviceBreakdown.push({ name: skill.n, price: skill.basePrice }); }
+  });
+
+  const shift = SHIFTS_DATA[B.shiftKey] || SHIFTS_DATA.LUOT;
+  const mode = overrideMode || B.timeMode;
+  let totalDays = 1, discountPercent = 0;
+
+  if (B.shiftKey === 'LUOT') { totalDays = 1; discountPercent = 0; }
+  else {
+    if (mode === 'week') { totalDays = 7; discountPercent = 0.08; }
+    else if (mode === 'month') { totalDays = 30; discountPercent = 0.15; }
+    else if (mode === 'custom') {
+      totalDays = overrideDays || B.customDays || 1;
+      if (totalDays >= 30) discountPercent = 0.15;
+      else if (totalDays >= 7) discountPercent = 0.08;
+      else if (totalDays >= 3) discountPercent = 0.05;
+    }
+  }
+
+  const dailyUnitCost = servicesTotal + shift.price;
+  const rawTotal = dailyUnitCost * totalDays;
+  const discountAmount = Math.round(rawTotal * discountPercent);
+  const finalTotal = rawTotal - discountAmount;
+
+  return { serviceBreakdown, servicesTotal, shiftPrice: shift.price, shiftName: shift.name, dailyUnitCost, totalDays, rawTotal, discountPercent, discountAmount, finalTotal };
+}
+
+function openBooking(){ loadServiceDetail('dieuduong'); setTimeout(()=>scrollToEl('bookingSection'),100); }
+
+function loadServiceDetail(key){
+  const d = SERVICES_DATA[key] || SERVICES_DATA.dieuduong;
+  $('detailBannerTitle').innerHTML = d.bannerTitle;
+  $('detailMainTitle').innerText = d.title;
+  $('detailMainContent').innerHTML = d.content;
+  navigateTo('serviceDetailPage');
+}
+
+function renderSteps(){
+  document.querySelectorAll('#wzSteps li').forEach(li=>{
+    const n = Number(li.dataset.step);
+    li.className = (n === B.step) ? 'active' : (n < B.step ? 'done' : '');
+  });
+  $('wzNav').style.display = B.step > 4 ? 'none' : 'flex';$('wzBack').style.visibility = B.step === 1 ? 'hidden' : 'visible';
+  const nx = $('wzNext'); nx.textContent = WZ_NEXT[B.step-1] || ''; nx.classList.toggle('final', B.step === 4);
+}
+
+function renderStep(){
+  const p = $('wzPanel'); let h = '';
+
+  // HÀM TẠO DÒNG TÓM TẮT LỰA CHỌN BƯỚC 1 KHI Ở CÁC BƯỚC SAU
+  let step1BadgeHtml = '';
+  if (B.step > 1) {
+    const selectedNames = B.selectedSkillKeys.map(k => WZ_SKILLS.find(s=>s.k===k)?.n).filter(Boolean).join(', ') || 'Chưa chọn';
+    const patientName = WZ_PATIENT.find(x=>x[0]===B.patient)?.[1] || 'Tự đi lại';
+    step1BadgeHtml = `
+      <div class="step1-selected-badge">
+        <i class="fa-solid fa-circle-check"></i>
+        <div>Đã chọn ở Bước 1: <strong>${selectedNames}</strong> | Tình trạng: <strong>${patientName}</strong></div>
+      </div>`;
+  }
+
+  if(B.step===1){
+    h=`<h3 class="wz-h">Bạn cần dịch vụ / chuyên môn nào?</h3>
+    <p class="wz-sub"><i class="fa-solid fa-circle-info"></i> Chọn một hoặc nhiều dịch vụ chuyên môn bên dưới:</p>
+    <div class="wz-grid2">
+      ${WZ_SKILLS.map(s => `
+        <div class="wz-card ${B.selectedSkillKeys.includes(s.k)?'sel':''}" data-act="toggleSkill" data-v="${s.k}">
+          <i class="fa-solid ${s.i}"></i>
+          <div><h5>${s.n}</h5><span class="d">${s.d}</span><span class="price-tag">+${fmt(s.basePrice)} VNĐ</span></div>
+        </div>`).join('')}
+    </div>
+    <div class="wz-label">Tình trạng vận động của người bệnh</div>
+    <div class="wz-pills">
+      ${WZ_PATIENT.map(x=>`<button type="button" class="wz-chip ${B.patient===x[0]?'sel':''}" data-act="patient" data-v="${x[0]}">${x[1]}</button>`).join('')}
+    </div>`;
+  }
+  else if(B.step===2){
+    const priceWeek = calculateBookingPrice('week');
+    const priceMonth = calculateBookingPrice('month');
+    const priceCustom = calculateBookingPrice('custom');
+
+    h = step1BadgeHtml + `
+    <h3 class="wz-h">Chọn loại ca & thời gian đặt dịch vụ</h3>
+    <div class="wz-label">① Lựa chọn loại ca trực</div>
+    ${Object.values(SHIFTS_DATA).map(s=>`
+      <div class="wz-shift ${B.shiftKey===s.key?'sel':''}" data-act="shift" data-v="${s.key}">
+        <div><h5>${s.name}</h5><span class="d">${s.desc}</span></div>
+        <div class="p">${fmt(s.price)}đ<small>/ ${s.unit}</small></div>
+      </div>`).join('')}`;
+
+    if(B.shiftKey==='LUOT'){
+      h+=`<div class="wz-label">② Khung giờ Y tá đến tận nhà</div>
+      <div class="wz-hours">${WZ_HOURS.map(x=>`<button type="button" class="wz-chip ${B.hour===x?'sel':''}" data-act="hour" data-v="${x}">${x}</button>`).join('')}</div>`;
+    } else {
+      h+=`<div class="wz-label">② Chọn thời hạn / Tần suất chăm sóc (Xem giá trực tiếp)</div>
+      <div class="time-options-grid">
+        <div class="time-opt-card ${B.timeMode==='week'?'sel':''}" data-act="timeMode" data-v="week">
+          <h5><i class="fa-regular fa-calendar-check"></i> Theo Tuần</h5>
+          <span class="sub-tag">Giảm 8% chi phí</span><span class="price-val">${fmt(priceWeek.finalTotal)} VNĐ</span>
+        </div>
+        <div class="time-opt-card ${B.timeMode==='month'?'sel':''}" data-act="timeMode" data-v="month">
+          <h5><i class="fa-solid fa-calendar-days"></i> Theo Tháng</h5>
+          <span class="sub-tag">Giảm 15% chi phí</span><span class="price-val">${fmt(priceMonth.finalTotal)} VNĐ</span>
+        </div>
+        <div class="time-opt-card ${B.timeMode==='custom'?'sel':''}" data-act="timeMode" data-v="custom">
+          <h5><i class="fa-solid fa-pen-to-square"></i> Mấy ngày tùy ý</h5>
+          <span class="sub-tag">${priceCustom.discountPercent > 0 ? `Giảm ${Math.round(priceCustom.discountPercent*100)}%` : 'Theo nhu cầu'}</span>
+          <span class="price-val">${fmt(priceCustom.finalTotal)} VNĐ</span>
+        </div>
+      </div>`;
+
+      if(B.timeMode==='custom'){
+        h+=`<div class="custom-days-box">
+          <label style="font-size:14px;font-weight:800">Số ngày bạn cần chăm sóc:</label>
+          <input type="number" id="wzCustomDaysInput" class="custom-days-input" value="${B.customDays}" min="1" max="180">
+          <span style="font-size:14px;font-weight:800">Ngày</span>
+        </div>`;
+      }
+    }
+
+    h+=`<div class="wz-label">③ Ngày bắt đầu phục vụ</div>
+    <div class="wz-row">
+      <input type="date" id="wzDate" class="wz-input" value="${B.dateStr}" min="${ymd(0)}">
+      ${[['Hôm nay',0],['Ngày mai',1],['Ngày kia',2]].map(x=>`<button type="button" class="wz-chip ${B.dateStr===ymd(x[1])?'sel':''}" data-act="qdate" data-v="${x[1]}">${x[0]}</button>`).join('')}
+    </div>`;
+  }
+  else if(B.step===3){
+    h = step1BadgeHtml + `
+    <h3 class="wz-h">Lựa chọn Người chăm sóc</h3>
+    <div class="wz-card ${!B.nurseId?'sel':''}" data-act="nurseAuto" style="margin-bottom:12px">
+      <i class="fa-solid fa-bolt-lightning"></i>
+      <div><h5>Để BBCare tự chọn Y tá tối ưu nhất</h5><span class="d">Hệ thống tự điều phối Y tá phù hợp nhất</span></div>
+    </div>`+
+    NURSES_DATABASE.map(n=>`
+      <div class="wz-card ${B.nurseId===n.id?'sel':''}" data-act="nurse" data-v="${n.id}" style="margin-bottom:8px">
+        <img src="${n.avatar}" class="nurse-avatar" alt="">
+        <div style="flex:1"><h5>${n.name}</h5><span class="d">${n.spec}</span></div>
+        <button type="button" class="btn-card" style="width:auto;padding:6px 12px;font-size:12px" data-act="profile" data-v="${n.id}">Xem hồ sơ</button>
+      </div>`).join('');
+  }
+  else if(B.step===4){
+    h = step1BadgeHtml + `
+    <h3 class="wz-h">Thông tin địa điểm & Thanh toán</h3>
+    <div class="wz-pills">
+      <button type="button" class="wz-chip ${B.place==='HOME'?'sel':''}" data-act="place" data-v="HOME">Tại nhà riêng</button>
+      <button type="button" class="wz-chip ${B.place==='HOSPITAL'?'sel':''}" data-act="place" data-v="HOSPITAL">Tại bệnh viện</button>
+    </div>
+    <div class="wz-form" style="margin-top:14px">
+      <div><label class="wz-label">Họ tên *</label><input id="wzName" class="wz-input" value="${escapeHtml(B.name)}"></div>
+      <div><label class="wz-label">Số điện thoại *</label><input id="wzPhone" class="wz-input" value="${escapeHtml(B.phone)}"></div>
+      <div class="full"><label class="wz-label">Địa chỉ *</label><input id="wzAddr" class="wz-input" value="${escapeHtml(B.addr)}"></div>
+    </div>`;
+  }
+  else {
+    const calc = calculateBookingPrice();
+    h=`<div class="wz-done">
+      <div class="ok"><i class="fa-solid fa-check"></i></div>
+      <h3 class="wz-h">Đặt ca thành công!</h3>
+      <div class="code">Mã đơn: ${B.code}</div>
+      <p class="wz-sub">Tổng thanh toán: <strong style="color:var(--danger-red);font-size:18px">${fmt(calc.finalTotal)} VNĐ</strong></p>
+      <button type="button" class="btn-card" style="width:auto;padding:12px 24px;margin-top:15px" data-act="viewProfile">Xem lịch hẹn của tôi</button>
+    </div>`;
+  }
+
+  p.innerHTML = h; renderSteps(); renderSummary();
+}
+
+function renderSummary(){
+  const summaryBox = $('wzSummaryBox');
+  const layoutGrid = $('wzLayoutGrid');
+  if(!summaryBox || !layoutGrid) return;
+
+  // CHỈ HIỆN BẢNG TÓM TẮT Ở BƯỚC 4 HOẶC KHI HOÀN TẤT (BƯỚC 5)
+  if (B.step === 4 || B.step === 5) {
+    summaryBox.classList.add('show');
+    layoutGrid.classList.add('has-summary');
+  } else {
+    summaryBox.classList.remove('show');
+    layoutGrid.classList.remove('has-summary');
+  }
+
+  const calc = calculateBookingPrice();
+  const shift = SHIFTS_DATA[B.shiftKey] || SHIFTS_DATA.LUOT;
+  const nurse = nurseObj();
+
+  let durationText = '1 Lượt';
+  if (B.shiftKey !== 'LUOT') {
+    if (B.timeMode === 'week') durationText = `7 Ngày (1 Tuần)`;
+    else if (B.timeMode === 'month') durationText = `30 Ngày (1 Tháng)`;
+    else if (B.timeMode === 'custom') durationText = `${B.customDays} Ngày chăm sóc`;
+  }
+
+  const row = (l, v) => `<div class="wz-sr"><span>${l}</span><strong class="${v?'':'empty'}">${v||'Chưa chọn'}</strong></div>`;
+  let skillNames = B.selectedSkillKeys.map(k => WZ_SKILLS.find(s=>s.k===k)?.n).filter(Boolean).join(', ');
+
+  $('wzSummaryRows').innerHTML = 
+    row('Dịch vụ đã chọn', skillNames) +
+    row('Gói ca trực', shift.name) +
+    row('Thời lượng đặt', durationText) +
+    row('Ngày bắt đầu', dmy(B.dateStr)) +
+    row('Người chăm sóc', nurse ? nurse.name : 'BBCare tự chọn');
+
+  let priceBreakdownHtml = `<div style="font-weight:800;font-size:12px;margin-bottom:6px;color:var(--primary-blue)">BẢNG GIÁ DỊCH VỤ:</div>`;
+  calc.serviceBreakdown.forEach(item => {
+    priceBreakdownHtml += `<div class="wz-price-item"><span>+ ${item.name}</span><strong>${fmt(item.price)} VNĐ</strong></div>`;
+  });
+  priceBreakdownHtml += `<div class="wz-price-item"><span>+ Đơn giá ca (${shift.name})</span><strong>${fmt(shift.price)} VNĐ</strong></div>`;
+  if(B.shiftKey !== 'LUOT' && calc.totalDays > 1) {
+    priceBreakdownHtml += `<div class="wz-price-item"><span>+ Thời gian</span><strong>x ${calc.totalDays} ngày</strong></div>`;
+  }
+
+  $('wzPriceBreakdown').innerHTML = priceBreakdownHtml;
+  $('wzTotal').textContent = fmt(calc.finalTotal) + ' VNĐ';
+  $('wzDiscount').textContent = calc.discountAmount > 0 ? `Đã ưu đãi giảm ${fmt(calc.discountAmount)} VNĐ` : '';
+}
+
+function wzValidate(step){
+  if(step===1 && B.selectedSkillKeys.length === 0) return 'Vui lòng chọn ít nhất 1 dịch vụ chuyên môn.';
+  if(step===2 && !B.dateStr) return 'Vui lòng chọn ngày bắt đầu.';
+  if(step===4 && (!B.name.trim() || !B.phone.trim() || !B.addr.trim())) return 'Vui lòng điền đầy đủ thông tin.';
+  return '';
+}
+
+function showErr(m){const e=$('wzError');e.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+m;e.classList.add('show');}
+function hideErr(){$('wzError').classList.remove('show');}
+function goStep(n){B.step=n;hideErr();renderStep();$('bookingSection').scrollIntoView({behavior:'smooth',block:'start'});}
+
+function wzNext(){
+  const err = wzValidate(B.step); if(err){showErr(err);return;}
+  hideErr(); if(B.step===4)submitBooking(); else goStep(B.step+1);
+}
+
+function submitBooking(){
+  B.code = 'APP-' + Math.floor(1000 + Math.random() * 9000);
+  goStep(5);
+}
+
+function initBooking(){
+  resetBooking(); renderStep();
+  $('wzPanel').addEventListener('click',e=>{
+    const el=e.target.closest('[data-act]'); if(!el)return;
+    const v=el.dataset.v, a=el.dataset.act; hideErr();
+    if(a==='toggleSkill'){
+      if(B.selectedSkillKeys.includes(v)) B.selectedSkillKeys = B.selectedSkillKeys.filter(k => k !== v);
+      else B.selectedSkillKeys.push(v);
+    }
+    else if(a==='patient') B.patient=v;
+    else if(a==='shift') B.shiftKey=v;
+    else if(a==='hour') B.hour=v;
+    else if(a==='timeMode') B.timeMode=v;
+    else if(a==='qdate') B.dateStr=ymd(Number(v));
+    else if(a==='nurseAuto') B.nurseId='';
+    else if(a==='nurse') B.nurseId=v;
+    else if(a==='place') B.place=v;
+    else if(a==='viewProfile'){navigateTo('profilePage');return;}
+    renderStep();
+  });
+
+  $('wzPanel').addEventListener('input',e=>{
+    if(e.target.id==='wzCustomDaysInput'){
+      let val = parseInt(e.target.value, 10);
+      if(isNaN(val) || val < 1) val = 1;
+      B.customDays = val;
+      renderSummary();
+    }
+    const m={wzName:'name',wzPhone:'phone',wzAddr:'addr'}[e.target.id];
+    if(m) B[m]=e.target.value;
+  });
+
+  $('wzNext').addEventListener('click',wzNext);$('wzBack').addEventListener('click',()=>{if(B.step>1)goStep(B.step-1);});
+}
+
+/* =========================================================
+   4. GIỎ HÀNG SẢN PHẨM
+========================================================= */
+function renderProducts(){
+  $('productGrid').innerHTML=PRODUCTS.map((p,i)=>`
+    <div class="product-card">
+      <img src="${p.img}" alt="" class="product-img">
+      <span class="product-tag">${p.tag}</span>
+      <h4 class="product-title">${p.full}</h4>
+      <p class="product-price">${p.priceText}</p>
+      <button type="button" class="btn-buy" onclick="addToCart('${p.title}',${p.price},'${p.img}')">THÊM VÀO GIỎ</button>
+    </div>`).join('');
+}
+
+function renderCartPage(){
+  const area=$('cartContentArea');
+  if(!cart.length){
+    area.innerHTML=`<p style="text-align:center;padding:40px">Giỏ hàng của bạn đang trống!</p>`;
+  } else {
+    area.innerHTML=`<table class="cart-table"><thead><tr><th>Sản phẩm</th><th>Thành tiền</th></tr></thead><tbody>`+
+    cart.map(it=>`<tr><td>${escapeHtml(it.title)} x${it.qty}</td><td>${fmt(it.price*it.qty)} VNĐ</td></tr>`).join('')+`</tbody></table>`;
+  }
+  updateSummary();
+}
+
+function addToCart(title,price,img){
+  const ex=cart.find(x=>x.title===title);
+  if(ex)ex.qty++; else cart.push({id:Date.now(),title,price,qty:1,img});
+  navigateTo('cartPage');
+}
+
+function updateSummary(){
+  const q=cart.reduce((s,i)=>s+i.qty,0), t=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  $('cartCount').innerText=q; $('cartSubtotal').innerText=fmt(t)+' VNĐ'; $('cartTotal').innerText=fmt(t)+' VNĐ';
+}
+
+function checkoutCartPage(){
+  alert('🎉 Đặt hàng thành công! BBCare sẽ giao hàng sớm nhất.');
+  cart=[]; renderCartPage();
+}
+
+function handleAccountClick(){ if(isLoggedIn) navigateTo('accountPage'); else openModal('authModal'); }
+function handleConsultSubmit(e){ e.preventDefault(); alert('BBCare sẽ gọi tư vấn trong 5 phút!'); closeModal('bookingModal'); }
+
+/* KHỞI TẠO */
+document.addEventListener('DOMContentLoaded',function(){
+  renderProducts(); updateSummary(); initBooking();
+});
+</script>
+</body>
+</html>
